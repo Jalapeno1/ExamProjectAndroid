@@ -2,6 +2,7 @@ package com.example.jonas.examproject;
 
 import android.content.Intent;
 import android.os.Parcelable;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import com.google.gson.Gson;
 
 import java.io.Serializable;
+import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -20,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
     private EditText title;
     private EditText content;
     private Button submit;
-
+    private TextToSpeech tts;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +32,24 @@ public class MainActivity extends ActionBarActivity {
         content = (EditText) findViewById(R.id.editTextContent);
         submit = (Button) findViewById(R.id.buttonSaveNote);
 
+
+
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
+                    @Override
+                    public void onInit(int status) {
+                        tts.setLanguage(Locale.US);
+                        tts.speak(title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                        tts.speak(content.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+                    }
+                });
+
+
                 Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
 
                 Gson gson = new Gson();
