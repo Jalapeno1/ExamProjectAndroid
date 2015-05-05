@@ -37,7 +37,7 @@ public class NoteObject implements Parcelable {
     
     @Override
     public int describeContents() {
-        return this.hashCode();
+        return 0;
     }
 
     @Override
@@ -45,7 +45,5 @@ public class NoteObject implements Parcelable {
         dest.writeString(title);
         dest.writeString(content);
     }
-
-    //hello
 
 }

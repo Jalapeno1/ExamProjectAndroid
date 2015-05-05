@@ -3,6 +3,7 @@ package com.example.jonas.examproject;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -34,16 +35,8 @@ public class OverviewActivity extends ActionBarActivity {
 
         String JSON_ARRAY = getIntent().getExtras().getString("JSON_NOTES");
 
-        showTitle.setText(JSON_ARRAY);
+        //showTitle.setText();
 
-        Intent i = this.getIntent();
-        allNotes = i.getParcelableArrayListExtra("allNotes");
-
-        //This is nothing...
-        //noteView.add
-
-//        NoteObject note = gson.fromJson(getIntent().getStringExtra("getNote"), NoteObject.class);
-//
 //        showTitle.setText(note.getTitle());
 //        showContent.setText(note.getContent());
     }
