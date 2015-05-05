@@ -51,6 +51,8 @@ public class MainActivity extends ActionBarActivity {
         submit = (Button) findViewById(R.id.buttonSaveNote);
 
 
+
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

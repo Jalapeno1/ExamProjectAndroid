@@ -38,6 +38,8 @@ public class OverviewActivity extends ActionBarActivity {
 
         Intent i = this.getIntent();
         allNotes = i.getParcelableArrayListExtra("allNotes");
+
+        //This is nothing...
         //noteView.add
 
 //        NoteObject note = gson.fromJson(getIntent().getStringExtra("getNote"), NoteObject.class);
