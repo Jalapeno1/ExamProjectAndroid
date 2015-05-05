@@ -11,18 +11,27 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewShowTitle"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:hint="Large Text" />
+        android:hint="Large Text"
+        android:layout_alignTop="@+id/textViewShowContent"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="88dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/textViewShowContent"
+        android:hint="Content"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/textViewShowTitle" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listViewNotes"
         android:layout_below="@+id/textViewShowTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:hint="Content" />
+        android:layout_toStartOf="@+id/textViewShowContent"
+        android:layout_marginTop="41dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

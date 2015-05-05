@@ -30,14 +30,21 @@ public class NoteObject implements Parcelable {
     public void setContent(String content) {
         this.content = content;
     }
-
+    
+    @Override public String toString(){
+        return title + ": " + content;
+    }
+    
     @Override
     public int describeContents() {
-        return 0;
+        return this.hashCode();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeString(title);
+        dest.writeString(content);
     }
+
+
 }
