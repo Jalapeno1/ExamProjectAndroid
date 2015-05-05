@@ -31,9 +31,9 @@ public class NoteObject implements Parcelable {
         this.content = content;
     }
     
-//    @Override public String toString(){
-//        return title + ": " + content;
-//    }
+    @Override public String toString(){
+        return "{\"title\": " + "\"" + title + "\"" + "\"content\": " + "\"" + content + "\"}";
+    }
     
     @Override
     public int describeContents() {
