@@ -35,7 +35,7 @@ public class OverviewActivity extends ActionBarActivity {
 
         String JSON_ARRAY = getIntent().getExtras().getString("JSON_NOTES");
 
-        //showTitle.setText();
+        showTitle.setText(JSON_ARRAY);
 
 //        showTitle.setText(note.getTitle());
 //        showContent.setText(note.getContent());
