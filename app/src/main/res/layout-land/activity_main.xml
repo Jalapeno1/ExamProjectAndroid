@@ -8,13 +8,12 @@
     <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/editTextTitle"
         android:layout_marginTop="70dp"
-        android:hint="@string/main_titleTextbox"
+        android:hint="Title               "
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginStart="30dp" />
@@ -27,13 +26,13 @@
         android:id="@+id/editTextContent"
         android:layout_below="@+id/editTextTitle"
         android:layout_alignStart="@+id/editTextTitle"
-        android:hint="@string/main_textTextbox"
+        android:hint="Text..."
         android:focusableInTouchMode="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/main_saveButton"
+        android:text="Save"
         android:id="@+id/buttonSaveNote"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -44,8 +43,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/mylabel"
-        android:id="@+id/textView3"
-        android:layout_above="@+id/buttonSaveNote"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/textView2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/editTextTitle" />
 
 </RelativeLayout>
