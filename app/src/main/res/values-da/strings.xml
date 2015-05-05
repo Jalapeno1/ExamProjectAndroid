@@ -3,8 +3,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_overview">OverviewActivity</string>
-    <string name="mylabel">English</string>
-    <string name="main_saveButton">Save</string>
-    <string name="main_titleTextbox">Title</string>
-    <string name="main_textTextbox">Text...</string>
+    <string name="mylabel">Dansk</string>
+    <string name="main_saveButton">Gem</string>
+    <string name="main_titleTextbox">Titel</string>
+    <string name="main_textTextbox">Tekst...</string>
 </resources>
