@@ -20,7 +20,9 @@ public class OverviewActivity extends ActionBarActivity {
     private TextView showContent;
     private ListView noteView;
 
-    public ArrayList<NoteObject> allNotes = new ArrayList<>();
+    private ArrayList<NoteObject> allNotes = new ArrayList<>();
+
+    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +33,18 @@ public class OverviewActivity extends ActionBarActivity {
         showContent = (TextView) findViewById(R.id.textViewShowContent);
         noteView = (ListView) findViewById(R.id.listViewNotes);
 
-        Gson gson = new Gson();
-
-        String JSON_ARRAY = getIntent().getExtras().getString("JSON_NOTES");
-
-        showTitle.setText(JSON_ARRAY);
+        addNewNote(getIntent().getExtras().getString("getNote"));
 
 //        showTitle.setText(note.getTitle());
 //        showContent.setText(note.getContent());
     }
 
+    public void addNewNote(String jsonObject){
+
+        NoteObject newNote = gson.fromJson(jsonObject, NoteObject.class);
+
+        allNotes.add(newNote);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -2,29 +2,22 @@ package com.example.jonas.examproject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -37,7 +30,6 @@ public class MainActivity extends ActionBarActivity {
 
     private String fileName = "notes.txt";
 
-    ArrayList<NoteObject> allNotes = new ArrayList<NoteObject>();
     Gson gson = new Gson();
 
 
@@ -50,9 +42,6 @@ public class MainActivity extends ActionBarActivity {
         title = (EditText) findViewById(R.id.editTextTitle);
         content = (EditText) findViewById(R.id.editTextContent);
         submit = (Button) findViewById(R.id.buttonSaveNote);
-
-
-
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,9 +62,6 @@ public class MainActivity extends ActionBarActivity {
 
                 NoteObject no = new NoteObject(title.getText().toString(), content.getText().toString());
 
-                allNotes.add(no);
-
-                JSONArray jsArray = new JSONArray(allNotes);
                 String jsonObject = gson.toJson(no);
 
 //                try {
@@ -86,9 +72,8 @@ public class MainActivity extends ActionBarActivity {
 //                            Toast.LENGTH_LONG).show();
 //                }
 
-                //i.putExtra("getNote", jsonObject);
-                //i.putParcelableArrayListExtra("allNotes", allNotes);
-                i.putExtra("JSON_NOTES", jsArray.toString());
+                i.putExtra("getNote", jsonObject);
+
                 startActivity(i);
 
             }
