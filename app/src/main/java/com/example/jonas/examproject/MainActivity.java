@@ -1,6 +1,5 @@
 package com.example.jonas.examproject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
@@ -12,12 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.google.gson.Gson;
 
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.util.Locale;
 
 
@@ -28,25 +21,28 @@ public class MainActivity extends ActionBarActivity {
     private Button submit;
     private TextToSpeech tts;
 
-    private String fileName = "notes.txt";
-
     Gson gson = new Gson();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initUI();
+        initButtonListener();
+
+    }
+
+    public void initUI(){
         title = (EditText) findViewById(R.id.editTextTitle);
         content = (EditText) findViewById(R.id.editTextContent);
         submit = (Button) findViewById(R.id.buttonSaveNote);
+    }
 
+    public void initButtonListener(){
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
                     @Override
                     public void onInit(int status) {
@@ -56,51 +52,14 @@ public class MainActivity extends ActionBarActivity {
                     }
                 });
 
-
-
                 Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
-
                 NoteObject no = new NoteObject(title.getText().toString(), content.getText().toString());
-
                 String jsonObject = gson.toJson(no);
-
-//                try {
-//                    writeFile(jsonObject);
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                    Toast.makeText(getApplicationContext(), "ERROR: Failed to save note.",
-//                            Toast.LENGTH_LONG).show();
-//                }
-
                 i.putExtra("getNote", jsonObject);
-
                 startActivity(i);
-
             }
         });
     }
-
-    public String readFile() throws IOException {
-        byte[] buffer = new byte[50];
-        FileInputStream fis = openFileInput(fileName);
-        fis.read(buffer);
-        fis.close();
-
-        return new String(buffer);
-    }
-
-    public void writeFile(String json) throws IOException {
-
-        try{
-            FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE);
-            fos.write(json.getBytes());
-            fos.close();
-        }
-        catch (IOException ioe){
-            //error message to come!
-        }
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
