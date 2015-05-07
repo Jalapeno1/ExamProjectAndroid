@@ -9,7 +9,7 @@
         android:id="@+id/noteTitle"
 
         android:layout_width="fill_parent"
-        android:layout_height="26dip"
+        android:layout_height="20dip"
 
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
@@ -24,7 +24,7 @@
         android:id="@+id/noteContent"
 
         android:layout_width="wrap_content"
-        android:layout_height="26dip"
+        android:layout_height="20dip"
 
         android:layout_alignParentLeft="true"
         android:layout_below="@id/noteTitle"
