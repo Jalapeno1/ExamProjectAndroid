@@ -25,8 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 public class OverviewActivity extends ListActivity {
 
@@ -48,7 +47,17 @@ public class OverviewActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        addNewNote(getIntent().getExtras().getString("getNote"));
+        //Reads all notes in DB
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        allNotes = dbHandler.getAll();
+
+        for(NoteObject no : allNotes){
+            //Prints to LOG
+            String log = "Title: " + no.getTitle() + ", Content: " + no.getContent();
+        }
+
+        //Is just duplicating(Not in use anymore)
+        //addNewNote(getIntent().getExtras().getString("getNote"));
 
         JSONArray jsonarray = new JSONArray(allNotes);
 
@@ -124,35 +133,35 @@ public class OverviewActivity extends ListActivity {
         public void handleMessage(Message msg)
         {
             allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
-                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "to see all of a repository's commitseven the first one ever made! " +
                     "Select a commit from the list to reveal its individual file diffs."));
             allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
                     "how to fork a project to your own account on GitHub, clone it in GitHub for " +
                     "Mac so that you can make your own changes, commit and sync those changes, and " +
                     "view the whole commit history."));
             allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
-                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "to see all of a repository's commitseven the first one ever made! " +
                     "Select a commit from the list to reveal its individual file diffs."));
             allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
                     "how to fork a project to your own account on GitHub, clone it in GitHub for " +
                     "Mac so that you can make your own changes, commit and sync those changes, and " +
                     "view the whole commit history."));
             allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
-                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "to see all of a repository's commitseven the first one ever made! " +
                     "Select a commit from the list to reveal its individual file diffs."));
             allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
                     "how to fork a project to your own account on GitHub, clone it in GitHub for " +
                     "Mac so that you can make your own changes, commit and sync those changes, and " +
                     "view the whole commit history."));
             allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
-                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "to see all of a repository's commitseven the first one ever made! " +
                     "Select a commit from the list to reveal its individual file diffs."));
             allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
                     "how to fork a project to your own account on GitHub, clone it in GitHub for " +
                     "Mac so that you can make your own changes, commit and sync those changes, and " +
                     "view the whole commit history."));
             allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
-                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "to see all of a repository's commitseven the first one ever made! " +
                     "Select a commit from the list to reveal its individual file diffs."));
             allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
                     "how to fork a project to your own account on GitHub, clone it in GitHub for " +
@@ -208,4 +217,5 @@ public class OverviewActivity extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }

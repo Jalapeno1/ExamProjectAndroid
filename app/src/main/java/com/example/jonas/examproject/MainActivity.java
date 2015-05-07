@@ -1,5 +1,6 @@
 package com.example.jonas.examproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 
 import java.util.Locale;
@@ -39,31 +42,40 @@ public class MainActivity extends ActionBarActivity {
     public void initUI(){
         title = (EditText) findViewById(R.id.editTextTitle);
         content = (EditText) findViewById(R.id.editTextContent);
-        submit = (Button) findViewById(R.id.buttonSaveNote);
         Log.d(TAG, "initiated UI");
     }
 
     public void initButtonListener(){
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
-                    @Override
-                    public void onInit(int status) {
-                        tts.setLanguage(Locale.US);
-                        tts.speak(title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
-                        tts.speak(content.getText().toString(), TextToSpeech.QUEUE_ADD, null);
-                    }
-                });
 
-                Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
-                NoteObject no = new NoteObject(title.getText().toString(), content.getText().toString());
-                String jsonObject = gson.toJson(no);
-                i.putExtra("getNote", jsonObject);
-                startActivity(i);
+        Log.d(TAG, "initiated ButtonListener");
+    }
+
+    public void newNote (View view) {
+
+        //Text to speech
+        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                tts.setLanguage(Locale.US);
+                tts.speak(title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                tts.speak(content.getText().toString(), TextToSpeech.QUEUE_ADD, null);
             }
         });
-        Log.d(TAG, "initiated ButtonListener");
+        //Writes to DB
+
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString());
+        dbHandler.addNote(noteObject);
+
+
+        Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
+
+        //Is just duplicating(Not in use anymore)
+/*        NoteObject no = new NoteObject(title.getText().toString(), content.getText().toString());
+        String jsonObject = gson.toJson(no);
+        i.putExtra("getNote", jsonObject);*/
+
+        startActivity(i);
     }
 
     @Override

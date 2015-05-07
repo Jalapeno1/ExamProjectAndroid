@@ -26,15 +26,8 @@
         android:gravity="top"
         android:focusableInTouchMode="true"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/buttonSaveNote" />
+        android:layout_above="@+id/buttonSave" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main_saveButton"
-        android:id="@+id/buttonSaveNote"
-        android:layout_alignBottom="@+id/textView3"
-        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -44,5 +37,14 @@
         android:id="@+id/textView3"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/main_Save"
+        android:id="@+id/buttonSave"
+        android:onClick="newNote"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

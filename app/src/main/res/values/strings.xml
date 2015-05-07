@@ -7,4 +7,5 @@
     <string name="main_saveButton">Save</string>
     <string name="main_titleTextbox">Title</string>
     <string name="main_textTextbox">Text...</string>
+    <string name="main_Save">Save</string>
 </resources>

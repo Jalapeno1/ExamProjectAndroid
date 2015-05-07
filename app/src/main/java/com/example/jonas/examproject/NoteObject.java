@@ -1,14 +1,13 @@
 package com.example.jonas.examproject;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
-/**
- * Created by Jonas on 28-04-2015.
- */
 public class NoteObject {
     private String title;
     private String content;
+
+    public NoteObject(){
+        //Empty Constructor for DB
+    }
 
     public NoteObject(String title, String content) {
         this.title = title;
