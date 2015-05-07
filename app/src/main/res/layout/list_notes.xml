@@ -4,32 +4,17 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:padding="6dip">
 
-    <TextView
-        android:id="@+id/toptext"
-
-        android:layout_width="wrap_content"
-        android:layout_height="26dip"
-        android:text="TopText"
-
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-
-        android:textStyle="bold"
-        android:singleLine="true"
-        android:ellipsize="marquee"
-        />
-
     <!-- Title of Note -->
     <TextView
         android:id="@+id/noteTitle"
 
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="26dip"
 
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/toptext"
 
+        android:textStyle="bold"
         android:singleLine="true"
         android:ellipsize="marquee"
         />
@@ -42,9 +27,8 @@
         android:layout_height="26dip"
 
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/toptext"
+        android:layout_below="@id/noteTitle"
 
-        android:textStyle="bold"
         android:gravity="center_vertical"
         />
 

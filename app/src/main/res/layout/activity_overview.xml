@@ -12,26 +12,16 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewShowTitle"
         android:hint="Large Text"
-        android:layout_alignParentTop="true"
+        android:text="Notes"
+        android:layout_alignTop="@+id/buttonNewNote"
         android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/textViewShowContent"
-        android:hint="Content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/android:list"
-        android:layout_below="@+id/textViewShowTitle"
-        android:layout_toStartOf="@+id/textViewShowContent"
-        android:layout_marginTop="41dp"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/buttonNewNote" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

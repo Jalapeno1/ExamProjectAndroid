@@ -36,20 +36,19 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
         NoteObject no = objects.get(position);
 
         if(no != null){
-            TextView top_text = (TextView) v.findViewById(R.id.toptext);
             TextView note_title = (TextView) v.findViewById(R.id.noteTitle);
             TextView note_content = (TextView) v.findViewById(R.id.noteContent);
-
-            if(top_text != null) {
-                top_text.setText("Your Notes:");
-            }
 
             if(note_title != null){
                 note_title.setText(no.getTitle());
             }
 
             if(note_content != null){
-                note_content.setText(no.getContent());
+                if(no.getContent().length() < 40){
+                    note_content.setText(no.getContent());
+                } else {
+                    note_content.setText(no.getContent().substring(0,40)+ "...");
+                }
             }
         }
         return v;

@@ -31,7 +31,6 @@ import java.util.ArrayList;
 public class OverviewActivity extends ListActivity {
 
     private TextView showTitle;
-    private TextView showContent;
     private ListView noteView;
     private Button buttonNewNote;
 
@@ -87,7 +86,6 @@ public class OverviewActivity extends ListActivity {
 
     public void initUI(){
         showTitle = (TextView) findViewById(R.id.textViewShowTitle);
-        showContent = (TextView) findViewById(R.id.textViewShowContent);
         //noteView = (ListView) findViewById(R.id.);
         buttonNewNote = (Button) findViewById(R.id.buttonNewNote);
         Log.d(TAG, "initiated UI");
@@ -125,8 +123,41 @@ public class OverviewActivity extends ListActivity {
     {
         public void handleMessage(Message msg)
         {
-//            allNotes.add(new NoteObject("TestTile", "TestContent"));
-//            allNotes.add(new NoteObject("TestTile2", "TestContent2"));
+            allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
+                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "Select a commit from the list to reveal its individual file diffs."));
+            allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
+                    "how to fork a project to your own account on GitHub, clone it in GitHub for " +
+                    "Mac so that you can make your own changes, commit and sync those changes, and " +
+                    "view the whole commit history."));
+            allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
+                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "Select a commit from the list to reveal its individual file diffs."));
+            allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
+                    "how to fork a project to your own account on GitHub, clone it in GitHub for " +
+                    "Mac so that you can make your own changes, commit and sync those changes, and " +
+                    "view the whole commit history."));
+            allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
+                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "Select a commit from the list to reveal its individual file diffs."));
+            allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
+                    "how to fork a project to your own account on GitHub, clone it in GitHub for " +
+                    "Mac so that you can make your own changes, commit and sync those changes, and " +
+                    "view the whole commit history."));
+            allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
+                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "Select a commit from the list to reveal its individual file diffs."));
+            allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
+                    "how to fork a project to your own account on GitHub, clone it in GitHub for " +
+                    "Mac so that you can make your own changes, commit and sync those changes, and " +
+                    "view the whole commit history."));
+            allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
+                    "to see all of a repository's commits容ven the first one ever made! " +
+                    "Select a commit from the list to reveal its individual file diffs."));
+            allNotes.add(new NoteObject("TestTitle2", "Congratulations! So far, you've learned " +
+                    "how to fork a project to your own account on GitHub, clone it in GitHub for " +
+                    "Mac so that you can make your own changes, commit and sync those changes, and " +
+                    "view the whole commit history."));
 
             adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
 
