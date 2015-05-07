@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +22,8 @@ public class MainActivity extends ActionBarActivity {
     private Button submit;
     private TextToSpeech tts;
 
+    private static final String TAG = "MainActivity";
+
     Gson gson = new Gson();
 
     @Override
@@ -37,6 +40,7 @@ public class MainActivity extends ActionBarActivity {
         title = (EditText) findViewById(R.id.editTextTitle);
         content = (EditText) findViewById(R.id.editTextContent);
         submit = (Button) findViewById(R.id.buttonSaveNote);
+        Log.d(TAG, "initiated UI");
     }
 
     public void initButtonListener(){
@@ -59,6 +63,7 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
+        Log.d(TAG, "initiated ButtonListener");
     }
 
     @Override

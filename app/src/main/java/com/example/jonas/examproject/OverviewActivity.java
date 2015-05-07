@@ -1,9 +1,12 @@
 package com.example.jonas.examproject;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.os.Handler;
 
 import com.google.gson.Gson;
 
@@ -21,11 +25,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 
-public class OverviewActivity extends ActionBarActivity {
+
+public class OverviewActivity extends ListActivity {
 
     private TextView showTitle;
     private TextView showContent;
@@ -33,7 +36,11 @@ public class OverviewActivity extends ActionBarActivity {
     private Button buttonNewNote;
 
     private ArrayList<NoteObject> allNotes = new ArrayList<>();
+    private Runnable viewNotes;
+    private CustomListAdapter adapter;
+
     private String fileName = "notes.txt";
+    private static final String TAG = "OverviewActivity";
 
     Gson gson = new Gson();
 
@@ -42,18 +49,15 @@ public class OverviewActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        initUI();
-        initButtonListener();
-
         addNewNote(getIntent().getExtras().getString("getNote"));
 
         JSONArray jsonarray = new JSONArray(allNotes);
 
+        initUI();
+        initButtonListener();
+        initAdapter();
+
         String laa = jsonarray.toString();
-
-        ArrayAdapter<NoteObject> adapter = new ArrayAdapter<NoteObject>(this, R.layout.activity_overview, allNotes);
-        noteView.setAdapter(adapter);
-
 
 //        String read = "";
 
@@ -78,14 +82,15 @@ public class OverviewActivity extends ActionBarActivity {
 
         String naa = Integer.toString(allNotes.size());
 
-        showContent.setText(maa + " : " + naa);
+        //showContent.setText(maa + " : " + naa);
     }
 
     public void initUI(){
         showTitle = (TextView) findViewById(R.id.textViewShowTitle);
         showContent = (TextView) findViewById(R.id.textViewShowContent);
-        noteView = (ListView) findViewById(R.id.listViewNotes);
+        //noteView = (ListView) findViewById(R.id.);
         buttonNewNote = (Button) findViewById(R.id.buttonNewNote);
+        Log.d(TAG, "initiated UI");
     }
 
     public void initButtonListener(){
@@ -96,7 +101,39 @@ public class OverviewActivity extends ActionBarActivity {
                 startActivity(i);
             }
         });
+        Log.d(TAG, "initiated ButtonListener");
     }
+
+    public void initAdapter(){
+        adapter = new CustomListAdapter(this, R.layout.list_notes, allNotes);
+        setListAdapter(adapter);
+
+        //start thread for list creating
+        viewNotes = new Runnable() {
+            @Override
+            public void run() {
+                handler.sendEmptyMessage(0);
+            }
+        };
+
+        Thread thread = new Thread(null, viewNotes, "MagentoBackground");
+        thread.start();
+        Log.d(TAG, "initiated Adapter");
+    }
+
+    private Handler handler = new Handler()
+    {
+        public void handleMessage(Message msg)
+        {
+//            allNotes.add(new NoteObject("TestTile", "TestContent"));
+//            allNotes.add(new NoteObject("TestTile2", "TestContent2"));
+
+            adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
+
+            setListAdapter(adapter);
+            Log.d(TAG, "HandlerSet");
+        }
+    };
 
     public String readFile() throws IOException {
         byte[] buffer = new byte[50];

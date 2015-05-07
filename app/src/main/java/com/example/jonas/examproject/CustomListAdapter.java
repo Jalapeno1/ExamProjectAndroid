@@ -14,10 +14,44 @@ import java.util.ArrayList;
  */
 public class CustomListAdapter extends ArrayAdapter<NoteObject> {
 
+    private ArrayList<NoteObject> objects;
+
     // https://devtut.wordpress.com/2011/06/09/custom-arrayadapter-for-a-listview-android/
 
-    public CustomListAdapter(Context context, ArrayList<NoteObject> items){
-        super(context, 0, items);
+    public CustomListAdapter(Context context, int textViewResourceId, ArrayList<NoteObject> items){
+        super(context, textViewResourceId, items);
+        this.objects = items;
     }
 
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+
+        View v = convertView;
+
+        if(v == null){
+            LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.list_notes, null);
+        }
+
+        NoteObject no = objects.get(position);
+
+        if(no != null){
+            TextView top_text = (TextView) v.findViewById(R.id.toptext);
+            TextView note_title = (TextView) v.findViewById(R.id.noteTitle);
+            TextView note_content = (TextView) v.findViewById(R.id.noteContent);
+
+            if(top_text != null) {
+                top_text.setText("Your Notes:");
+            }
+
+            if(note_title != null){
+                note_title.setText(no.getTitle());
+            }
+
+            if(note_content != null){
+                note_content.setText(no.getContent());
+            }
+        }
+        return v;
+    }
 }
