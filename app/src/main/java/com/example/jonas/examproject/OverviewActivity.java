@@ -1,37 +1,24 @@
 package com.example.jonas.examproject;
 
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
-import android.os.Parcelable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.os.Handler;
 
 import com.google.gson.Gson;
-
-import org.json.JSONArray;
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class OverviewActivity extends ListActivity {
 
-    private TextView showTitle;
     private ListView noteView;
     private Button buttonNewNote;
 
@@ -39,11 +26,8 @@ public class OverviewActivity extends ListActivity {
     private Runnable viewNotes;
     private CustomListAdapter adapter;
 
-    private String fileName = "notes.txt";
     private static final String TAG = "OverviewActivity";
     public NoteObject objectToEdit;
-
-    Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,30 +45,11 @@ public class OverviewActivity extends ListActivity {
             String log = "Title: " + no.getTitle() + ", Content: " + no.getContent();
         }
 
-        //Is just duplicating(Not in use anymore)
-        //addNewNote(getIntent().getExtras().getString("getNote"));
-
-        JSONArray jsonarray = new JSONArray(allNotes);
-
         initUI();
         initButtonListener();
         initAdapter();
         initListViewListener();
 
-        String laa = jsonarray.toString();
-
-//        String read = "";
-
-//        try {
-//            writeFile(jsonarray.toString());
-//            read = readFile();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            Toast.makeText(getApplicationContext(), "SAVING ERROR: Your notes may not be saved.",
-//            Toast.LENGTH_LONG).show();
-//        }
-//
-//        showTitle.setText(read);
     }
 
     public void noteEdit(){
@@ -93,31 +58,6 @@ public class OverviewActivity extends ListActivity {
         } catch (Exception e){
 
         }
-
-//        try{
-//            Intent in = getIntent();
-//
-//            NoteObject tempObject = in.getParcelableExtra("objectToChange");
-//
-//            objectToEdit.setTitle(tempObject.getTitle());
-//            objectToEdit.setContent(tempObject.getContent());
-//
-//            Log.d(TAG, tempObject.toString());
-//        } catch (Exception e){
-//            Log.d(TAG, "ERROR COULD NOT FIND EDIT");
-//        }
-    }
-
-    public void addNewNote(String jsonObject){
-        NoteObject newNote = gson.fromJson(jsonObject, NoteObject.class);
-
-        String maa = Integer.toString(allNotes.size());
-
-        allNotes.add(newNote);
-
-        String naa = Integer.toString(allNotes.size());
-
-        //showContent.setText(maa + " : " + naa);
     }
     
     public void initListViewListener(){
@@ -145,7 +85,6 @@ public class OverviewActivity extends ListActivity {
     }
 
     public void initUI(){
-        showTitle = (TextView) findViewById(R.id.textViewShowTitle);
         //noteView = (ListView) findViewById(R.id.);
         buttonNewNote = (Button) findViewById(R.id.buttonNewNote);
         Log.d(TAG, "initiated UI");
@@ -223,34 +162,13 @@ public class OverviewActivity extends ListActivity {
                     "Mac so that you can make your own changes, commit and sync those changes, and " +
                     "view the whole commit history."));
 
-            //NOTE: hvis der skal hentes data fra DB/server, så gøres det her.
+            //NOTE: hvis der skal hentes data fra DB/server, saa goeres det her.
             adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
 
             setListAdapter(adapter);
             Log.d(TAG, "HandlerSet");
         }
     };
-
-    public String readFile() throws IOException {
-        byte[] buffer = new byte[50];
-        FileInputStream fis = openFileInput(fileName);
-        fis.read(buffer);
-        fis.close();
-
-        return new String(buffer);
-    }
-
-    public void writeFile(String json) throws IOException {
-
-        try{
-            FileOutputStream fos = openFileOutput(fileName, Context.MODE_PRIVATE);
-            fos.write(json.getBytes());
-            fos.close();
-        }
-        catch (IOException ioe){
-            //error message to come!
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

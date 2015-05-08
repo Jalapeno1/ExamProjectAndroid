@@ -27,8 +27,6 @@ public class MainActivity extends ActionBarActivity {
 
     private static final String TAG = "MainActivity";
 
-    Gson gson = new Gson();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +51,14 @@ public class MainActivity extends ActionBarActivity {
     public void newNote (View view) {
 
         //Text to speech
-        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                tts.setLanguage(Locale.US);
-                tts.speak(title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
-                tts.speak(content.getText().toString(), TextToSpeech.QUEUE_ADD, null);
-            }
-        });
+//        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
+//            @Override
+//            public void onInit(int status) {
+//                tts.setLanguage(Locale.US);
+//                tts.speak(title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+//                tts.speak(content.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+//            }
+//        });
         //Writes to DB
 
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
@@ -69,11 +67,6 @@ public class MainActivity extends ActionBarActivity {
 
 
         Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
-
-        //Is just duplicating(Not in use anymore)
-/*        NoteObject no = new NoteObject(title.getText().toString(), content.getText().toString());
-        String jsonObject = gson.toJson(no);
-        i.putExtra("getNote", jsonObject);*/
 
         startActivity(i);
     }
