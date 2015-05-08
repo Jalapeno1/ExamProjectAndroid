@@ -18,6 +18,8 @@ public class EditNoteActivity extends ActionBarActivity {
     private EditText editTextContent;
     private Button saveEdit;
 
+    private String oldtitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +32,13 @@ public class EditNoteActivity extends ActionBarActivity {
         editTextTitle = (EditText) findViewById(R.id.editTextTitle_EditNote);
         editTextContent = (EditText) findViewById(R.id.editTextContent_EditNote);
 
-
         Intent i = getIntent();
 
         editTextTitle.setText(i.getStringExtra("TitleToEdit"));
         editTextContent.setText(i.getStringExtra("ContentToEdit"));
+
+        oldtitle = i.getStringExtra("TitleToEdit");
+
 
     }
 
@@ -44,15 +48,17 @@ public void editNote (View view){
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
 
+
         //Calls DBHandler with the new object
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         NoteObject noteObject = new NoteObject(title, content);
-        dbHandler.updateNote(noteObject);
+        dbHandler.updateNote(oldtitle, noteObject);
 
         //Changes view
         Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
         startActivity(i);
-        //dbHandler.deleteNote(noteObject.getTitle().toString());
+        //dbHandler.deleteNote(noteObject.getTitle().toString
+        // ());
     }
     public void deleteNote (View view){
 

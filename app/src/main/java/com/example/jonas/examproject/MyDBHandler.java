@@ -103,7 +103,9 @@ public class MyDBHandler extends SQLiteOpenHelper {
             return result;
         }
 
-    public void updateNote(NoteObject noteObject) {
+    public void updateNote(String oldTitle, NoteObject noteObject) {
+
+        Log.d("Old title: ", ""+oldTitle);
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -113,8 +115,6 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         // updating row
         db.update(TABLE_NOTES, values, COLUMN_TITLE + " = ?",
-                new String[] { String.valueOf(noteObject.getTitle()) });
-        db.update(TABLE_NOTES, values, COLUMN_CONTENT + " = ?",
-                new String[] { String.valueOf(noteObject.getContent()) });
+                new String[] { String.valueOf(oldTitle) });
     }
 }
