@@ -8,4 +8,5 @@
     <string name="main_titleTextbox">Title</string>
     <string name="main_textTextbox">Text...</string>
     <string name="main_Save">Save</string>
+    <string name="title_activity_edit_note">EditNoteActivity</string>
 </resources>

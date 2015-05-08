@@ -4,12 +4,14 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -39,6 +41,7 @@ public class OverviewActivity extends ListActivity {
 
     private String fileName = "notes.txt";
     private static final String TAG = "OverviewActivity";
+    public NoteObject objectToEdit;
 
     Gson gson = new Gson();
 
@@ -46,6 +49,8 @@ public class OverviewActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+        noteEdit();
 
         //Reads all notes in DB
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
@@ -64,6 +69,7 @@ public class OverviewActivity extends ListActivity {
         initUI();
         initButtonListener();
         initAdapter();
+        initListViewListener();
 
         String laa = jsonarray.toString();
 
@@ -81,6 +87,27 @@ public class OverviewActivity extends ListActivity {
 //        showTitle.setText(read);
     }
 
+    public void noteEdit(){
+        try{
+            Log.d(TAG, objectToEdit.toString());
+        } catch (Exception e){
+
+        }
+
+//        try{
+//            Intent in = getIntent();
+//
+//            NoteObject tempObject = in.getParcelableExtra("objectToChange");
+//
+//            objectToEdit.setTitle(tempObject.getTitle());
+//            objectToEdit.setContent(tempObject.getContent());
+//
+//            Log.d(TAG, tempObject.toString());
+//        } catch (Exception e){
+//            Log.d(TAG, "ERROR COULD NOT FIND EDIT");
+//        }
+    }
+
     public void addNewNote(String jsonObject){
         NoteObject newNote = gson.fromJson(jsonObject, NoteObject.class);
 
@@ -91,6 +118,30 @@ public class OverviewActivity extends ListActivity {
         String naa = Integer.toString(allNotes.size());
 
         //showContent.setText(maa + " : " + naa);
+    }
+    
+    public void initListViewListener(){
+        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onClickItem EXECUTED");
+
+                objectToEdit = (NoteObject)parent.getAdapter().getItem(position);
+
+                Log.d(TAG, objectToEdit.toString());
+
+                String SELECTED_TITLE = objectToEdit.getTitle();
+                String SELECTED_CONTENT = objectToEdit.getContent();
+
+                Intent i = new Intent(getApplicationContext(), EditNoteActivity.class);
+
+                i.putExtra("TitleToEdit", SELECTED_TITLE);
+                i.putExtra("ContentToEdit", SELECTED_CONTENT);
+                i.putExtra("objectToChange", objectToEdit);
+
+                startActivity(i);
+            }
+        });
     }
 
     public void initUI(){
