@@ -163,6 +163,8 @@ public class OverviewActivity extends ListActivity {
     }
 
     public void initAdapter(){
+
+        //instantiate the custom adapter (XML layout file; list_notes & objects; ArrayList<NoteObjects> added)
         adapter = new CustomListAdapter(this, R.layout.list_notes, allNotes);
         setListAdapter(adapter);
 
@@ -179,10 +181,12 @@ public class OverviewActivity extends ListActivity {
         Log.d(TAG, "initiated Adapter");
     }
 
+    //handles the data used for the listView
     private Handler handler = new Handler()
     {
         public void handleMessage(Message msg)
         {
+            //test data :-)
             allNotes.add(new NoteObject("TestTitle", "You can scroll the History view up and down " +
                     "to see all of a repository's commitseven the first one ever made! " +
                     "Select a commit from the list to reveal its individual file diffs."));
@@ -219,6 +223,7 @@ public class OverviewActivity extends ListActivity {
                     "Mac so that you can make your own changes, commit and sync those changes, and " +
                     "view the whole commit history."));
 
+            //NOTE: hvis der skal hentes data fra DB/server, så gøres det her.
             adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
 
             setListAdapter(adapter);
