@@ -27,13 +27,25 @@
         android:hint="Content"
         android:gravity="top"
         android:focusableInTouchMode="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/buttonSaveEdited" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
-        android:id="@+id/buttonSaveEdit"
-        android:layout_centerVertical="true"
+        android:id="@+id/buttonSaveEdited"
+        android:onClick="editNote"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="57dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:id="@+id/buttonDeleteNote"
+        android:onClick="deleteNote"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

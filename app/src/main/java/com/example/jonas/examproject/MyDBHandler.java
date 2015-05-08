@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -79,7 +80,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
         }
 
     //Delete note (Not finish)
-        public boolean deleteProduct(String noteTitle) {
+        public boolean deleteNote(String noteTitle) {
 
             boolean result = false;
 
@@ -101,4 +102,17 @@ public class MyDBHandler extends SQLiteOpenHelper {
             db.close();
             return result;
         }
+
+    public void updateNote(NoteObject noteObject) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, noteObject.getTitle());
+        values.put(COLUMN_CONTEXT, noteObject.getContent());
+
+        // updating row
+        db.update(TABLE_NOTES, values, COLUMN_TITLE + " = ?",
+                new String[] { String.valueOf(noteObject.getTitle()) });
     }
+}

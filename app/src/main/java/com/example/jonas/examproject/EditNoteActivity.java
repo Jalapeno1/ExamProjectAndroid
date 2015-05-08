@@ -3,6 +3,7 @@ package com.example.jonas.examproject;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,37 +29,47 @@ public class EditNoteActivity extends ActionBarActivity {
     public void initUI(){
         editTextTitle = (EditText) findViewById(R.id.editTextTitle_EditNote);
         editTextContent = (EditText) findViewById(R.id.editTextContent_EditNote);
-        saveEdit = (Button) findViewById(R.id.buttonSaveEdit);
+
 
         Intent i = getIntent();
 
-        Log.d("Editnoteactivity", i.getStringExtra("TitleToEdit"));
-
         editTextTitle.setText(i.getStringExtra("TitleToEdit"));
         editTextContent.setText(i.getStringExtra("ContentToEdit"));
-        Log.d("SOMETHING", i.getParcelableExtra("objectToChange").toString());
 
-        saveEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                OverviewActivity ao = new OverviewActivity();
-                if(ao.objectToEdit == null){
-                    Log.d("ONCLICKER IN EDITNOTE", "object is null");
-                } else {
-                    ao.objectToEdit.setTitle(editTextTitle.getText().toString());
-                    ao.objectToEdit.setContent(editTextContent.getText().toString());
-                }
-
-//                NoteObject objectEdit = new NoteObject(editTextTitle.getText().toString(), editTextContent.getText().toString());
-//
-//                Intent ie = new Intent(getApplicationContext(), OverviewActivity.class);
-//
-//                ie.putExtra("objectToChange", objectEdit);
-//
-//                startActivity(ie);
-            }
-        });
     }
+
+public void editNote (View view){
+
+        //Gets edited text
+        String title = editTextTitle.getText().toString();
+        String content = editTextContent.getText().toString();
+
+        //Calls DBHandler with the new object
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        NoteObject noteObject = new NoteObject(title, content);
+        dbHandler.updateNote(noteObject);
+
+        //Changes view
+        Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
+        startActivity(i);
+        //dbHandler.deleteNote(noteObject.getTitle().toString());
+    }
+    public void deleteNote (View view){
+
+        //Gets the text
+        String title = editTextTitle.getText().toString();
+        String content = editTextContent.getText().toString();
+
+        //Calls DBHandler
+        MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
+        NoteObject noteObject = new NoteObject(title, content);
+        dbHandler.deleteNote(title);
+
+        //Changes view
+        Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
+        startActivity(i);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
