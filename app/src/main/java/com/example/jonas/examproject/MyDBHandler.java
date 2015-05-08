@@ -11,12 +11,12 @@ import java.util.ArrayList;
 
 public class MyDBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static final String DATABASE_NAME = "noteDB.db";
     private static final String TABLE_NOTES = "notes";
 
     public static final String COLUMN_TITLE = "noteTitle";
-    public static final String COLUMN_CONTEXT = "noteContext";
+    public static final String COLUMN_CONTENT = "noteContext";
 
     public MyDBHandler(Context context, String name,
                        SQLiteDatabase.CursorFactory factory, int version) {
@@ -27,7 +27,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
             String CREATE_PRODUCTS_TABLE = "CREATE TABLE " +
                     TABLE_NOTES + "("
                     + COLUMN_TITLE + " TEXT,"
-                    + COLUMN_CONTEXT + " TEXT" + ")";
+                    + COLUMN_CONTENT + " TEXT" + ")";
             db.execSQL(CREATE_PRODUCTS_TABLE);
         }
         @Override
@@ -42,7 +42,7 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
             ContentValues values = new ContentValues();
             values.put(COLUMN_TITLE, noteObject.getTitle());
-            values.put(COLUMN_CONTEXT, noteObject.getContent());
+            values.put(COLUMN_CONTENT, noteObject.getContent());
 
             SQLiteDatabase db = this.getWritableDatabase();
 
@@ -109,10 +109,12 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_TITLE, noteObject.getTitle());
-        values.put(COLUMN_CONTEXT, noteObject.getContent());
+        values.put(COLUMN_CONTENT, noteObject.getContent());
 
         // updating row
         db.update(TABLE_NOTES, values, COLUMN_TITLE + " = ?",
                 new String[] { String.valueOf(noteObject.getTitle()) });
+        db.update(TABLE_NOTES, values, COLUMN_CONTENT + " = ?",
+                new String[] { String.valueOf(noteObject.getContent()) });
     }
 }
