@@ -31,21 +31,30 @@
         android:layout_above="@+id/buttonSaveEdited" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Save"
         android:id="@+id/buttonSaveEdited"
         android:onClick="editNote"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="57dp" />
+        android:background="@android:color/holo_green_dark"
+        android:textColor="@android:color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:shadowColor="@android:color/holo_green_dark"
+        android:layout_above="@+id/buttonDeleteNote"
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/buttonDeleteNote"
         android:onClick="deleteNote"
+        android:background="@android:color/holo_red_dark"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/holo_red_dark"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignStart="@+id/buttonSaveEdited" />
 </RelativeLayout>
