@@ -52,7 +52,6 @@
         android:layout_height="wrap_content"
         android:text="Delete"
         android:id="@+id/buttonDeleteNote"
-        android:onClick="deleteNote"
         android:background="@android:color/holo_red_dark"
         android:textColor="@android:color/white"
         android:shadowColor="@android:color/holo_red_dark"

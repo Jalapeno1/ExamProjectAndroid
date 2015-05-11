@@ -30,17 +30,20 @@ public class OverviewActivity extends ListActivity {
 
     private static final String TAG = "OverviewActivity";
     public NoteObject objectToEdit;
+    private static boolean DEVELOPLER_MODE = true; //Clear DB on
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        noteEdit();
-
         //Reads all notes in DB
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        addTestData(dbHandler);
+        if(DEVELOPLER_MODE){
+            dbHandler.deleteAll();
+            addTestData(dbHandler);
+            DEVELOPLER_MODE = false;
+        }
         allNotes = dbHandler.getAll();
 
         for(NoteObject no : allNotes){
@@ -53,14 +56,6 @@ public class OverviewActivity extends ListActivity {
         initAdapter();
         initListViewListener();
 
-    }
-
-    public void noteEdit(){
-        try{
-            Log.d(TAG, objectToEdit.toString());
-        } catch (Exception e){
-
-        }
     }
     
     public void initListViewListener(){
@@ -182,7 +177,6 @@ public class OverviewActivity extends ListActivity {
                 "how to fork a project to your own account on GitHub, clone it in GitHub for " +
                 "Mac so that you can make your own changes, commit and sync those changes, and " +
                 "view the whole commit history.");
-        dbHandler.deleteAll();
 
         dbHandler.addNote(a);
         dbHandler.addNote(b);

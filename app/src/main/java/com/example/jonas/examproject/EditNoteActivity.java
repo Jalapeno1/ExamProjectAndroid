@@ -1,6 +1,8 @@
 package com.example.jonas.examproject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,7 +16,8 @@ public class EditNoteActivity extends Activity {
 
     private EditText editTextTitle;
     private EditText editTextContent;
-    private Button saveEdit;
+    private Button buttonSaveEdit;
+    private Button buttonDeleteNote;
 
     private String oldtitle;
 
@@ -29,6 +32,8 @@ public class EditNoteActivity extends Activity {
     public void initUI(){
         editTextTitle = (EditText) findViewById(R.id.editTextTitle_EditNote);
         editTextContent = (EditText) findViewById(R.id.editTextContent_EditNote);
+        buttonSaveEdit = (Button) findViewById(R.id.buttonSaveEdited);
+        buttonDeleteNote = (Button) findViewById(R.id.buttonDeleteNote);
 
         Intent i = getIntent();
 
@@ -37,7 +42,31 @@ public class EditNoteActivity extends Activity {
 
         oldtitle = i.getStringExtra("TitleToEdit");
 
+        //lock functionality -> change when 'edit' clicked
+        editTextTitle.setFocusable(false);
+        editTextContent.setFocusable(false);
+        buttonSaveEdit.setVisibility(View.INVISIBLE);
 
+        //Delete Button Listener
+        buttonDeleteNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final View view = v;
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Delete");
+                builder.setMessage("Are you sure?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteNote(view);
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                AlertDialog ad = builder.create();
+                ad.setCanceledOnTouchOutside(true);
+                ad.show();
+            }
+        });
     }
 
 public void editNote (View view){
@@ -89,9 +118,16 @@ public void editNote (View view){
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:
+                break;
+            case R.id.action_edit:
+                editTextTitle.setFocusableInTouchMode(true);
+                editTextContent.setFocusableInTouchMode(true);
+                buttonSaveEdit.setVisibility(View.VISIBLE);
+                break;
+            default:
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
