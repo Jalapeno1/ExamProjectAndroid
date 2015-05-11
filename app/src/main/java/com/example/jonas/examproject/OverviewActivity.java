@@ -30,7 +30,7 @@ public class OverviewActivity extends ListActivity {
 
     private static final String TAG = "OverviewActivity";
     public NoteObject objectToEdit;
-    private static boolean DEVELOPLER_MODE = true; //Clear DB on
+    private static boolean DEVELOPLER_MODE = true; //Clear DB
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +42,7 @@ public class OverviewActivity extends ListActivity {
         if(DEVELOPLER_MODE){
             dbHandler.deleteAll();
             addTestData(dbHandler);
+            //ensures that DB is only reset on app startup
             DEVELOPLER_MODE = false;
         }
         allNotes = dbHandler.getAll();
@@ -125,15 +126,6 @@ public class OverviewActivity extends ListActivity {
         {
             //NOTE: hvis der skal hentes data fra DB/server, saa goeres det her.
             adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
-
-//            for(int i = 0; i < allNotes.size(); i++){
-//               db.addNote(allNotes.get(i));
-//            }
-
-//            for(Iterator<NoteObject> i = allNotes.iterator(); i.hasNext();){
-//                db.addNote(i.next());
-//            }
-
             setListAdapter(adapter);
             Log.d(TAG, "HandlerSet");
         }
