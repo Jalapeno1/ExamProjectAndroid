@@ -115,6 +115,11 @@ public class MyDBHandler extends SQLiteOpenHelper {
 
         // updating row
         db.update(TABLE_NOTES, values, COLUMN_TITLE + " = ?",
-                new String[] { String.valueOf(oldTitle) });
+                new String[]{String.valueOf(oldTitle)});
+    }
+
+    public void deleteAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("delete from "+TABLE_NOTES);
     }
 }

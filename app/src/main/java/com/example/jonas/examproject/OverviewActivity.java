@@ -182,6 +182,7 @@ public class OverviewActivity extends ListActivity {
                 "how to fork a project to your own account on GitHub, clone it in GitHub for " +
                 "Mac so that you can make your own changes, commit and sync those changes, and " +
                 "view the whole commit history.");
+        dbHandler.deleteAll();
 
         dbHandler.addNote(a);
         dbHandler.addNote(b);
