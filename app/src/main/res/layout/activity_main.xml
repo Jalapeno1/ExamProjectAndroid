@@ -17,8 +17,8 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:hint="Content"
+        android:inputType="textShortMessage|textAutoCorrect|textCapSentences|textMultiLine"
+        android:hint="Note"
         android:ems="10"
         android:id="@+id/editTextContent"
         android:layout_below="@+id/editTextTitle"
