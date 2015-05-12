@@ -9,4 +9,5 @@
     <string name="main_textTextbox">Text...</string>
     <string name="main_Save">Save</string>
     <string name="title_activity_edit_note">EditNoteActivity</string>
+    <string name="title_activity_take_picture">TakePictureActivity</string>
 </resources>

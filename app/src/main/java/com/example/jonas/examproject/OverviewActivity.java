@@ -17,6 +17,7 @@ import android.os.Handler;
 
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 
 public class OverviewActivity extends ListActivity {
@@ -46,6 +47,7 @@ public class OverviewActivity extends ListActivity {
             DEVELOPLER_MODE = false;
         }
         allNotes = dbHandler.getAll();
+        Collections.reverse(allNotes);
 
         for(NoteObject no : allNotes){
             //Prints to LOG

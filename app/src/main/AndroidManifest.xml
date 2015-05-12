@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jonas.examproject" >
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,6 +26,10 @@
         <activity
             android:name=".EditNoteActivity"
             android:label="@string/title_activity_edit_note" >
+        </activity>
+        <activity
+            android:name=".TakePictureActivity"
+            android:label="@string/title_activity_take_picture" >
         </activity>
     </application>
 

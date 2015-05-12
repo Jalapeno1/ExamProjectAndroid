@@ -2,6 +2,9 @@ package com.example.jonas.examproject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.speech.tts.TextToSpeech;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +16,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
+import java.io.File;
 import java.util.Locale;
 
 
@@ -84,8 +88,15 @@ public class MainActivity extends Activity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id){
+            case R.id.action_settings:
+                break;
+            case R.id.action_take_picture:
+                Intent newI = new Intent(getApplicationContext(), TakePictureActivity.class);
+                startActivity(newI);
+                break;
+            default:
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
