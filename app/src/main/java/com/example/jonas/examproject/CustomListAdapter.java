@@ -57,7 +57,11 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
                 if(no.getContent().length() < 40){
                     note_content.setText(no.getContent());
                 } else {
-                    note_content.setText(no.getContent().substring(0,40)+ "...");
+                    if(no.getContent().contains("imageDir")){
+                        note_content.setText("[Picture Note]");
+                    } else {
+                        note_content.setText(no.getContent().substring(0,40)+ "...");
+                    }
                 }
             }
         }
