@@ -74,13 +74,23 @@ public class OverviewActivity extends ListActivity {
                 String SELECTED_TITLE = objectToEdit.getTitle();
                 String SELECTED_CONTENT = objectToEdit.getContent();
 
-                Intent i = new Intent(getApplicationContext(), EditNoteActivity.class);
+                //Checks if note contains path to picture and goes to ViewPictureActivity
+                if(SELECTED_CONTENT.contains(".jpg")){
+                    Intent i = new Intent(getApplicationContext(), EditNoteActivity.class);
+                    i.putExtra("TitleToEdit", SELECTED_TITLE);
+                    i.putExtra("ContentToEdit", SELECTED_CONTENT);
+                    i.putExtra("objectToChange", objectToEdit);
+                    startActivity(i);
+                }
 
-                i.putExtra("TitleToEdit", SELECTED_TITLE);
-                i.putExtra("ContentToEdit", SELECTED_CONTENT);
-                i.putExtra("objectToChange", objectToEdit);
+                else{
+                    Intent i = new Intent(getApplicationContext(), EditNoteActivity.class);
+                    i.putExtra("TitleToEdit", SELECTED_TITLE);
+                    i.putExtra("ContentToEdit", SELECTED_CONTENT);
+                    i.putExtra("objectToChange", objectToEdit);
+                    startActivity(i);
+                }
 
-                startActivity(i);
             }
         });
     }
