@@ -1,6 +1,8 @@
 package com.example.jonas.examproject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -55,7 +57,19 @@ public class ViewPictureActivity extends Activity {
         deletePic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteImageFromStorage();
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Delete");
+                builder.setMessage("Are you sure?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        deleteImageFromStorage();
+                    }
+                });
+                builder.setNegativeButton("No", null);
+                AlertDialog ad = builder.create();
+                ad.setCanceledOnTouchOutside(true);
+                ad.show();
             }
         });
     }
