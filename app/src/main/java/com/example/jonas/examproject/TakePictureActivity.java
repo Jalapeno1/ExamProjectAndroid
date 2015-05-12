@@ -117,9 +117,6 @@ public class TakePictureActivity extends Activity {
 
     public void takePicture(){
         Intent newI = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-//        fileName = "temp_file_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
-//        imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), fileName));
-//        newI.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(newI, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
 

@@ -7,8 +7,11 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -20,9 +23,13 @@ import java.io.FileNotFoundException;
 public class ViewPictureActivity extends Activity {
 
     private ImageView image;
+    private Button deletePic;
     private String picTitle;
     private String picDir;
     private EditText viewTitle;
+    private Bitmap b = null;
+    private File file;
+    private MyDBHandler db = new MyDBHandler(this, null, null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,24 +41,30 @@ public class ViewPictureActivity extends Activity {
     public void initUI(){
         image = (ImageView) findViewById(R.id.imageViewPicture);
         viewTitle = (EditText) findViewById(R.id.pictureTextTitle_PictureView);
+        deletePic = (Button) findViewById(R.id.buttonDeletePicture);
 
         Intent i = getIntent();
 
         picTitle = i.getStringExtra("TitleToEdit");
         viewTitle.setText(picTitle);
+        viewTitle.setFocusable(false);
         picDir = i.getStringExtra("ContentToEdit");
 
-
         loadImageFromStorage(picDir, picTitle);
+
+        deletePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteImageFromStorage();
+            }
+        });
     }
 
     public Bitmap loadImageFromStorage(String path, String title)
     {
-        Bitmap b = null;
-
         try {
-            File f = new File(path, title + ".jpg");
-            b = BitmapFactory.decodeStream(new FileInputStream(f));
+            file = new File(path, title + ".jpg");
+            b = BitmapFactory.decodeStream(new FileInputStream(file));
             image.setImageBitmap(b);
         }
         catch (FileNotFoundException e)
@@ -60,6 +73,15 @@ public class ViewPictureActivity extends Activity {
         }
 
         return b;
+    }
+
+    public void deleteImageFromStorage(){
+        boolean delt = file.delete();
+        Log.d("ViewPictureActivity", Boolean.toString(delt));
+        db.deleteNote(picTitle);
+
+        Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
+        startActivity(i);
     }
 
     @Override
