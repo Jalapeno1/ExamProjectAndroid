@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.util.Locale;
 
 
 public class EditNoteActivity extends Activity {
@@ -20,6 +23,7 @@ public class EditNoteActivity extends Activity {
     private Button buttonDeleteNote;
 
     private String oldtitle;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +73,18 @@ public class EditNoteActivity extends Activity {
         });
     }
 
-public void editNote (View view){
+    public void textToSpeech(){
+            tts = new TextToSpeech(EditNoteActivity.this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                tts.setLanguage(Locale.US);
+                tts.speak(editTextTitle.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
+                tts.speak(editTextContent.getText().toString(), TextToSpeech.QUEUE_ADD, null);
+            }
+        });
+    }
+
+    public void editNote (View view){
 
         //Gets edited text
         String title = editTextTitle.getText().toString();
@@ -125,6 +140,9 @@ public void editNote (View view){
                 editTextTitle.setFocusableInTouchMode(true);
                 editTextContent.setFocusableInTouchMode(true);
                 buttonSaveEdit.setVisibility(View.VISIBLE);
+                break;
+            case R.id.action_t2p:
+                textToSpeech();
                 break;
             default:
                 return true;

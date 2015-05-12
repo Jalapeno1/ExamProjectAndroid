@@ -25,7 +25,6 @@ public class MainActivity extends Activity {
     private EditText title;
     private EditText content;
     private Button submit;
-    private TextToSpeech tts;
 
     private static final String TAG = "MainActivity";
 
@@ -52,17 +51,7 @@ public class MainActivity extends Activity {
 
     public void newNote (View view) {
 
-        //Text to speech
-//        tts = new TextToSpeech(MainActivity.this, new TextToSpeech.OnInitListener() {
-//            @Override
-//            public void onInit(int status) {
-//                tts.setLanguage(Locale.US);
-//                tts.speak(title.getText().toString(), TextToSpeech.QUEUE_FLUSH, null);
-//                tts.speak(content.getText().toString(), TextToSpeech.QUEUE_ADD, null);
-//            }
-//        });
         //Writes to DB
-
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString());
         dbHandler.addNote(noteObject);
