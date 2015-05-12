@@ -1,24 +1,25 @@
 package com.example.jonas.examproject;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 
 public class TakePictureActivity extends Activity {
@@ -27,9 +28,12 @@ public class TakePictureActivity extends Activity {
     private Uri imageUri;
     private ImageView picture;
     private Button savePicture;
+    private TextView pictureTitle;
     private String fileName;
     private Bitmap bmp;
-    private MyDBHandler db;
+    private Bitmap bmpToSave;
+    private String savePath;
+    private MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,23 +46,50 @@ public class TakePictureActivity extends Activity {
     public void initUI(){
         picture = (ImageView) findViewById(R.id.imageViewPictureNote);
         savePicture = (Button) findViewById(R.id.buttonSavePicture);
+        pictureTitle = (TextView) findViewById(R.id.PictureNote_Title);
 
         savePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String bitmapstring = BitMapToString(bmp);
-                db.addNote(new NoteObject("test", bitmapstring));
+                //savePath = ih.saveToInternalSorage("test", getApplicationContext(), bmp);
+
+                String picTitle = pictureTitle.getText().toString();
+                savePath = saveToInternalSorage(picTitle, bmp);
+                //also save to NoteOverview to view picture notes in OverviewActivity
+                NoteObject no = new NoteObject(picTitle, savePath);
+                dbHandler.addNote(no);
+
+                Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
+
+                startActivity(i);
 
             }
         });
     }
 
-    public String BitMapToString(Bitmap bitmap){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        byte[] b = baos.toByteArray();
-        String temp = Base64.encodeToString(b, Base64.DEFAULT);
-        return temp;
+    public String saveToInternalSorage(String title, Bitmap bitmapImage){
+
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+
+        File path = new File(directory, "/" + title + ".jpg");
+
+        FileOutputStream fos;
+
+        try {
+            fos = new FileOutputStream(path);
+
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return directory.getAbsolutePath();
     }
 
     @Override
