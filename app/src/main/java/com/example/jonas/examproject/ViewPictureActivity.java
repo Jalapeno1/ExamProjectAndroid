@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -70,6 +71,16 @@ public class ViewPictureActivity extends Activity {
                 AlertDialog ad = builder.create();
                 ad.setCanceledOnTouchOutside(true);
                 ad.show();
+            }
+        });
+
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setDataAndType(Uri.fromFile(file), "image/*");
+                startActivity(intent);
             }
         });
     }
