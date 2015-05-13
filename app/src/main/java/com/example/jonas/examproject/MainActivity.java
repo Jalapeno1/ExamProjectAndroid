@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -56,6 +57,8 @@ public class MainActivity extends Activity {
         NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString());
         dbHandler.addNote(noteObject);
 
+        Toast.makeText(getApplicationContext(), "Note created...",
+                Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
 

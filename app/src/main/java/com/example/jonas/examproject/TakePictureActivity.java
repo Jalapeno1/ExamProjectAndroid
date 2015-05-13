@@ -54,10 +54,13 @@ public class TakePictureActivity extends Activity {
                 //savePath = ih.saveToInternalSorage("test", getApplicationContext(), bmp);
 
                 String picTitle = pictureTitle.getText().toString();
-                savePath = saveToInternalSorage(picTitle, bmp);
+                savePath = saveToInternalStorage(picTitle, bmp);
                 //also save to NoteOverview to view picture notes in OverviewActivity
                 NoteObject no = new NoteObject(picTitle, savePath);
                 dbHandler.addNote(no);
+
+                Toast.makeText(getApplicationContext(), "Picture note created...",
+                        Toast.LENGTH_LONG).show();
 
                 Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
 
@@ -67,7 +70,7 @@ public class TakePictureActivity extends Activity {
         });
     }
 
-    public String saveToInternalSorage(String title, Bitmap bitmapImage){
+    public String saveToInternalStorage(String title, Bitmap bitmapImage){
 
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
