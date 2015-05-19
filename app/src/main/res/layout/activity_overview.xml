@@ -12,7 +12,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textViewShowTitle"
         android:hint="Large Text"
-        android:text="Notes"
+        android:text="@string/overview_Label"
         android:layout_alignParentStart="true"
         />
 
@@ -30,7 +30,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Note"
+        android:text="@string/overview_newNote"
         android:id="@+id/buttonNewNote"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

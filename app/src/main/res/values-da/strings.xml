@@ -1,12 +1,25 @@
 <resources>
     <string name="app_name">ExamProject</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Indstillinger</string>
     <string name="title_activity_overview">OverviewActivity</string>
     <string name="mylabel">Dansk</string>
     <string name="main_saveButton">Gem</string>
     <string name="main_titleTextbox">Titel</string>
     <string name="main_textTextbox">Tekst...</string>
     <string name="main_Save">Gem</string>
+    <string name="edit_note_delete">Slet</string>
+    <string name="edit_note_save">Gem</string>
+    <string name="edit_text_Title">Titel</string>
+    <string name="edit_text_content">Note</string>
+    <string name="main_Note">Note</string>
+    <string name="main_Title">Titel</string>
+    <string name="overview_Label">Noter</string>
+    <string name="overview_newNote">Ny Note</string>
+    <string name="title_activity_edit_note"></string>
+    <string name="menu_edit">Rediger</string>
+    <string name="menu_makeNote">Ny Note</string>
+    <string name="menu_takePicture">Tag Billede</string>
+    <string name="menu_textToSpeech">Læs Højt</string>
 
 </resources>

@@ -11,4 +11,16 @@
     <string name="title_activity_edit_note">EditNoteActivity</string>
     <string name="title_activity_take_picture">TakePictureActivity</string>
     <string name="title_activity_view_picture">ViewPictureActivity</string>
+    <string name="edit_note_delete">Delete</string>
+    <string name="edit_note_save">Save</string>
+    <string name="edit_text_Title">Title</string>
+    <string name="edit_text_content">Content</string>
+    <string name="main_Title">Title</string>
+    <string name="main_Note">Note</string>
+    <string name="overview_Label">Notes</string>
+    <string name="overview_newNote">Add Note</string>
+    <string name="menu_makeNote">Make Note</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_textToSpeech">Read Out Loud</string>
+    <string name="menu_takePicture">Take Picture</string>
 </resources>
