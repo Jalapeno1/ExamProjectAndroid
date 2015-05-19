@@ -1,35 +1,48 @@
 package com.example.jonas.examproject;
 
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.support.v4.app.DialogFragment;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
 
 
-public class EditNoteActivity extends Activity {
+public class EditNoteActivity extends FragmentActivity {
 
     private EditText editTextTitle;
     private EditText editTextContent;
     private Button buttonSaveEdit;
     private Button buttonDeleteNote;
 
+    private static int noteID;
+
     private String oldtitle;
     private TextToSpeech tts;
 
     private PendingIntent pendingIntent;
+
+    private static String TAG = "EditNoteActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +50,18 @@ public class EditNoteActivity extends Activity {
         setContentView(R.layout.activity_edit_note);
 
         initUI();
-        testAlarm();
+        //testAlarm();
     }
 
-    public void testAlarm(){
+    public void testAlarm(int day,int month, int year, int hour, int minute){
         Calendar calendar = Calendar.getInstance();
 
-        calendar.set(Calendar.MONTH, 4);
-        calendar.set(Calendar.YEAR, 2015);
-        calendar.set(Calendar.DAY_OF_MONTH, 19);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
 
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 4);
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
 
         Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);
@@ -56,8 +69,6 @@ public class EditNoteActivity extends Activity {
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-
-
     }
 
     public void initUI(){
@@ -147,6 +158,12 @@ public class EditNoteActivity extends Activity {
         startActivity(i);
     }
 
+    public void showTimeAndDatePickerDialog() {
+        FragmentManager fm = getSupportFragmentManager();
+        DialogFragment newFragment = new TimeAndDatePickerFragment();
+        newFragment.show(fm, "datePickerHOLO");
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -170,6 +187,9 @@ public class EditNoteActivity extends Activity {
                 editTextContent.setFocusableInTouchMode(true);
                 buttonSaveEdit.setVisibility(View.VISIBLE);
                 break;
+            case R.id.action_addNotification:
+                showTimeAndDatePickerDialog();
+                break;
             case R.id.action_t2p:
                 textToSpeech();
                 break;
@@ -178,5 +198,33 @@ public class EditNoteActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static class TimeAndDatePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener{
+
+        private int hour;
+        private int minute;
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            //set current time as default values
+            final Calendar c = Calendar.getInstance();
+            hour = c.get(Calendar.HOUR_OF_DAY);
+            minute = c.get(Calendar.MINUTE);
+
+            //create new instance of dialog
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            Log.d(TAG, "Time HOUR: " + Integer.toString(hourOfDay));
+            ((EditNoteActivity)getActivity()).testAlarm(19,5,2015,hourOfDay,minute);
+        }
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+
+        }
     }
 }

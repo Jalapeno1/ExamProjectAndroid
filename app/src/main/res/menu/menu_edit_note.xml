@@ -6,6 +6,8 @@
         android:orderInCategory="100" app:showAsAction="never"/>
     <item android:id="@+id/action_t2p" android:title="@string/menu_textToSpeech"
         android:orderInCategory="100" app:showAsAction="never"/>
+    <item android:id="@+id/action_addNotification" android:title="Add Notification"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>
