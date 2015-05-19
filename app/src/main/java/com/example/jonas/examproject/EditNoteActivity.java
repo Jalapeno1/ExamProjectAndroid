@@ -41,6 +41,7 @@ public class EditNoteActivity extends FragmentActivity {
     private TextToSpeech tts;
 
     private PendingIntent pendingIntent;
+    private AlarmManager alarmManager = null;
 
     private static String TAG = "EditNoteActivity";
 
@@ -50,6 +51,8 @@ public class EditNoteActivity extends FragmentActivity {
         setContentView(R.layout.activity_edit_note);
 
         initUI();
+
+        alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         //testAlarm();
     }
 
@@ -67,8 +70,16 @@ public class EditNoteActivity extends FragmentActivity {
         Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);
         pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    public void cancelAlarms(){
+        try {
+            alarmManager.cancel(pendingIntent);
+            Log.d(TAG, "Alarms cancelled");
+        } catch (Exception e) {
+            Log.e(TAG, "AlarmManager not canceled. " + e.toString());
+        }
     }
 
     public void initUI(){
@@ -200,10 +211,13 @@ public class EditNoteActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class TimeAndDatePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener{
+    //'add notification' fragment
+    public static class TimeAndDatePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
         private int hour;
         private int minute;
+
+        private int callCount = 0;
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -212,19 +226,22 @@ public class EditNoteActivity extends FragmentActivity {
             hour = c.get(Calendar.HOUR_OF_DAY);
             minute = c.get(Calendar.MINUTE);
 
-            //create new instance of dialog
-            return new TimePickerDialog(getActivity(), this, hour, minute,
+            final TimePickerDialog dl = new TimePickerDialog(getActivity(), this, hour, minute,
                     DateFormat.is24HourFormat(getActivity()));
+
+            //create new instance of dialog
+            return dl;
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             Log.d(TAG, "Time HOUR: " + Integer.toString(hourOfDay));
-            ((EditNoteActivity)getActivity()).testAlarm(19,5,2015,hourOfDay,minute);
-        }
-
-        @Override
-        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
+            if(callCount == 1){
+                ((EditNoteActivity)getActivity()).testAlarm(19,5,2015,hourOfDay,minute);
+                Log.d(TAG, "ADDED" + Integer.toString(callCount));
+            } else {
+                Log.d(TAG,"NO " + Integer.toString(callCount));
+            }
+            callCount++;
         }
     }
 }
