@@ -47,8 +47,8 @@ public class EditNoteActivity extends Activity {
         calendar.set(Calendar.YEAR, 2015);
         calendar.set(Calendar.DAY_OF_MONTH, 19);
 
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
-        calendar.set(Calendar.MINUTE, 56);
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
+        calendar.set(Calendar.MINUTE, 4);
         calendar.set(Calendar.SECOND, 0);
 
         Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);

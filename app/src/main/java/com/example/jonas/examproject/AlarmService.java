@@ -26,7 +26,7 @@ public class AlarmService extends Service {
         super.onStart(intent, startId);
 
         mManager = (NotificationManager) this.getApplicationContext().getSystemService(this.getApplicationContext().NOTIFICATION_SERVICE);
-        Intent intent1 = new Intent(this.getApplicationContext(),MainActivity.class);
+        Intent intent1 = new Intent(this.getApplicationContext(),OverviewActivity.class);
 
         Notification notification = new Notification(R.mipmap.ic_launcher,"This is a test message!", System.currentTimeMillis());
         intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
