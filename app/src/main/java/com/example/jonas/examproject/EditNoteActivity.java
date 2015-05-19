@@ -1,7 +1,9 @@
 package com.example.jonas.examproject;
 
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 
@@ -26,12 +29,35 @@ public class EditNoteActivity extends Activity {
     private String oldtitle;
     private TextToSpeech tts;
 
+    private PendingIntent pendingIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_note);
 
         initUI();
+        testAlarm();
+    }
+
+    public void testAlarm(){
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.MONTH, 4);
+        calendar.set(Calendar.YEAR, 2015);
+        calendar.set(Calendar.DAY_OF_MONTH, 19);
+
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 56);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);
+        pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+
+
     }
 
     public void initUI(){
