@@ -23,4 +23,7 @@
     <string name="menu_edit">Edit</string>
     <string name="menu_textToSpeech">Read Out Loud</string>
     <string name="menu_takePicture">Take Picture</string>
+    <string name="view_picture_delete">Delete</string>
+    <string name="view_picture_title">Title</string>
+    <string name="toast_noteDeleted">Note deleted...</string>
 </resources>

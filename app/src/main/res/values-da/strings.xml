@@ -21,5 +21,8 @@
     <string name="menu_makeNote">Ny Note</string>
     <string name="menu_takePicture">Tag Billede</string>
     <string name="menu_textToSpeech">Læs Højt</string>
+    <string name="view_picture_delete">Slet</string>
+    <string name="view_picture_title">Titel</string>
+    <string name="toast_noteDeleted">Note Slettet</string>
 
 </resources>

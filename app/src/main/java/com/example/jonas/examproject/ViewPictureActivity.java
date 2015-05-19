@@ -65,7 +65,7 @@ public class ViewPictureActivity extends Activity {
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Note deleted...",
+                        Toast.makeText(getApplicationContext(), getString(R.string.toast_noteDeleted),
                                 Toast.LENGTH_LONG).show();
                         deleteImageFromStorage();
                     }
