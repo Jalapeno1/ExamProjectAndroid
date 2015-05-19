@@ -56,32 +56,6 @@ public class EditNoteActivity extends FragmentActivity {
         //testAlarm();
     }
 
-    public void testAlarm(int day,int month, int year, int hour, int minute){
-        Calendar calendar = Calendar.getInstance();
-
-        calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-
-        Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);
-        pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
-
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-    }
-
-    public void cancelAlarms(){
-        try {
-            alarmManager.cancel(pendingIntent);
-            Log.d(TAG, "Alarms cancelled");
-        } catch (Exception e) {
-            Log.e(TAG, "AlarmManager not canceled. " + e.toString());
-        }
-    }
-
     public void initUI(){
         editTextTitle = (EditText) findViewById(R.id.editTextTitle_EditNote);
         editTextContent = (EditText) findViewById(R.id.editTextContent_EditNote);
@@ -122,6 +96,35 @@ public class EditNoteActivity extends FragmentActivity {
                 ad.show();
             }
         });
+    }
+
+    public void testAlarm(int day,int month, int year, int hour, int minute){
+        Calendar calendar = Calendar.getInstance();
+
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);
+        myIntent.putExtra("Title", editTextTitle.getText().toString());
+        myIntent.putExtra("Content", editTextContent.getText().toString());
+        pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
+
+        //AlarmManager.RTC does not wake the device up (RTC_WAKEUP will) and will not be delivered until the device wakes up
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+    }
+
+    public void cancelAlarms(){
+        try {
+            alarmManager.cancel(pendingIntent);
+            Log.d(TAG, "Alarms cancelled");
+        } catch (Exception e) {
+            Log.e(TAG, "AlarmManager not canceled. " + e.toString());
+        }
     }
 
     public void textToSpeech(){
@@ -233,13 +236,14 @@ public class EditNoteActivity extends FragmentActivity {
             return dl;
         }
 
+        //onTimeSet is called twice for some reason 'callCount' fixes this
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Log.d(TAG, "Time HOUR: " + Integer.toString(hourOfDay));
+            Log.d(TAG, "HOUR: " + Integer.toString(hourOfDay));
             if(callCount == 1){
                 ((EditNoteActivity)getActivity()).testAlarm(19,5,2015,hourOfDay,minute);
-                Log.d(TAG, "ADDED" + Integer.toString(callCount));
+                Log.d(TAG, "ADDED " + Integer.toString(callCount));
             } else {
-                Log.d(TAG,"NO " + Integer.toString(callCount));
+                Log.d(TAG,"NOT ADDED " + Integer.toString(callCount));
             }
             callCount++;
         }

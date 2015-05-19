@@ -14,7 +14,11 @@ public class NotificationBroadcaster extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        String title = intent.getStringExtra("Title");
+        String content = intent.getStringExtra("Content");
         Intent service1 = new Intent(context, AlarmService.class);
+        service1.putExtra("Title", title);
+        service1.putExtra("Content",content);
         context.startService(service1);
         Log.d(TAG, "OnReceive");
     }
