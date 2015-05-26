@@ -2,9 +2,9 @@ package com.example.jonas.examproject;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.os.Message;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,13 +12,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.os.Handler;
 
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 
 public class OverviewActivity extends ListActivity {
 
@@ -75,7 +71,7 @@ public class OverviewActivity extends ListActivity {
                 String SELECTED_CONTENT = objectToEdit.getContent();
 
                 //Checks if note contains path to picture and goes to ViewPictureActivity
-                if(SELECTED_CONTENT.contains("/storage/sdcard/")){
+                if(SELECTED_CONTENT.contains("/storage/")){
                     Intent i = new Intent(getApplicationContext(), ViewPictureActivity.class);
                     i.putExtra("TitleToEdit", SELECTED_TITLE);
                     i.putExtra("ContentToEdit", SELECTED_CONTENT);

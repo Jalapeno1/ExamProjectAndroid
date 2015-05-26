@@ -54,7 +54,7 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
             if(note_content != null){
 
                 //only allows a maksimum of 40 characters to avoid a HUGE liste
-                if(no.getContent().contains("/storage/sdcard/")){
+                if(no.getContent().contains("/storage/")){
                     note_content.setText("[Picture Note]");
                 } else {
                     if(no.getContent().length() < 40){
