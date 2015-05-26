@@ -81,7 +81,7 @@ public class MainActivity extends Activity implements
         NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString() + " - Cordinates: " + cordinates );
         dbHandler.addNote(noteObject);
 
-        Toast.makeText(getApplicationContext(), "Note created...",
+        Toast.makeText(getApplicationContext(), getString(R.string.noteCreatedToast),
                 Toast.LENGTH_LONG).show();
 
         Intent i = new Intent(getApplicationContext(), OverviewActivity.class);

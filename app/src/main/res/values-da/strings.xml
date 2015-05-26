@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">ExamProject</string>
+    <string name="app_name">Projekt Navn</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Indstillinger</string>
-    <string name="title_activity_overview">OverviewActivity</string>
+    <string name="title_activity_overview">Note Oversigt</string>
     <string name="mylabel">Dansk</string>
     <string name="main_saveButton">Gem</string>
     <string name="main_titleTextbox">Titel</string>
-    <string name="main_textTextbox">Tekst...</string>
+    <string name="main_textTextbox">Tekst…</string>
     <string name="main_Save">Gem</string>
     <string name="edit_note_delete">Slet</string>
     <string name="edit_note_save">Gem</string>
@@ -16,15 +16,17 @@
     <string name="main_Title">Titel</string>
     <string name="overview_Label">Noter</string>
     <string name="overview_newNote">Tilføj Note</string>
-    <string name="title_activity_edit_note">EditNoteActivity</string>
-    <string name="title_activity_take_picture">TakePictureActivity</string>
-    <string name="title_activity_view_picture">ViewPictureActivity</string>
+    <string name="title_activity_edit_note">Note</string>
+    <string name="title_activity_take_picture">Billede Note</string>
+    <string name="title_activity_view_picture">Billede Note</string>
     <string name="menu_edit">Rediger</string>
     <string name="menu_makeNote">Ny Note</string>
     <string name="menu_takePicture">Tag Billede</string>
     <string name="menu_textToSpeech">Læs Højt</string>
     <string name="view_picture_delete">Slet</string>
     <string name="view_picture_title">Titel</string>
-    <string name="toast_noteDeleted">Note Slettet</string>
+    <string name="toast_noteDeleted">Note Slettet…</string>
+    <string name="noteCreatedToast">Note Tilføjet…</string>
+    <string name="title_activity_main">Note Oversigt</string>
 
 </resources>
