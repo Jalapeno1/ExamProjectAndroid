@@ -60,9 +60,9 @@ public class ViewPictureActivity extends Activity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Delete");
-                builder.setMessage("Are you sure?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.edit_note_delete_title));
+                builder.setMessage(getString(R.string.edit_note_delete_message));
+                builder.setPositiveButton(getString(R.string.edit_note_delete_positive), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), getString(R.string.toast_noteDeleted),
@@ -70,7 +70,7 @@ public class ViewPictureActivity extends Activity {
                         deleteImageFromStorage();
                     }
                 });
-                builder.setNegativeButton("No", null);
+                builder.setNegativeButton(getString(R.string.edit_note_delete_negative), null);
                 AlertDialog ad = builder.create();
                 ad.setCanceledOnTouchOutside(true);
                 ad.show();

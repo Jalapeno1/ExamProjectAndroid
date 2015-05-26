@@ -80,17 +80,17 @@ public class EditNoteActivity extends FragmentActivity {
             public void onClick(View v) {
                 final View view = v;
                 AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Delete");
-                builder.setMessage("Are you sure?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder.setTitle(getString(R.string.edit_note_delete_title));
+                builder.setMessage(getString(R.string.edit_note_delete_message));
+                builder.setPositiveButton(getString(R.string.edit_note_delete_positive), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Note deleted...",
+                        Toast.makeText(getApplicationContext(), getString(R.string.edit_note_delete_toast_message),
                                 Toast.LENGTH_LONG).show();
                         deleteNote(view);
                     }
                 });
-                builder.setNegativeButton("No", null);
+                builder.setNegativeButton(getString(R.string.edit_note_delete_negative), null);
                 AlertDialog ad = builder.create();
                 ad.setCanceledOnTouchOutside(true);
                 ad.show();
@@ -240,7 +240,7 @@ public class EditNoteActivity extends FragmentActivity {
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             Log.d(TAG, "HOUR: " + Integer.toString(hourOfDay));
             if(callCount == 1){
-                ((EditNoteActivity)getActivity()).testAlarm(19,5,2015,hourOfDay,minute);
+                ((EditNoteActivity)getActivity()).testAlarm(26,5,2015,hourOfDay,minute);
                 Log.d(TAG, "ADDED " + Integer.toString(callCount));
             } else {
                 Log.d(TAG,"NOT ADDED " + Integer.toString(callCount));

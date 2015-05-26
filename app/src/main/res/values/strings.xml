@@ -28,4 +28,10 @@
     <string name="toast_noteDeleted">Note deleted…</string>
     <string name="noteCreatedToast">Note created…</string>
     <string name="title_activity_main">Note Overview</string>
+    <string name="menu_add_notification">Add Notification</string>
+    <string name="edit_note_delete_title">Delete</string>
+    <string name="edit_note_delete_message">Are you sure?</string>
+    <string name="edit_note_delete_positive">Yes</string>
+    <string name="edit_note_delete_toast_message">Note deleted…</string>
+    <string name="edit_note_delete_negative">No</string>
 </resources>

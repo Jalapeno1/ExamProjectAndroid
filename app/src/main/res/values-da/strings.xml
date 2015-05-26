@@ -28,5 +28,11 @@
     <string name="toast_noteDeleted">Note Slettet…</string>
     <string name="noteCreatedToast">Note Tilføjet…</string>
     <string name="title_activity_main">Note Oversigt</string>
+    <string name="menu_add_notification">Tilføj Notifikation</string>
+    <string name="edit_note_delete_title">Slet</string>
+    <string name="edit_note_delete_message">Er du sikker?</string>
+    <string name="edit_note_delete_positive">Ja</string>
+    <string name="edit_note_delete_toast_message">Note slettet…</string>
+    <string name="edit_note_delete_negative">Nej</string>
 
 </resources>
