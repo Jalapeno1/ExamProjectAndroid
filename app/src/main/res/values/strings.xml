@@ -34,4 +34,5 @@
     <string name="edit_note_delete_positive">Yes</string>
     <string name="edit_note_delete_toast_message">Note deleted…</string>
     <string name="edit_note_delete_negative">No</string>
+    <string name="menu_remove_notification">Remove Notification</string>
 </resources>

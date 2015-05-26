@@ -8,6 +8,8 @@
         android:orderInCategory="100" app:showAsAction="never"/>
     <item android:id="@+id/action_addNotification" android:title="@string/menu_add_notification"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_removeNotification" android:title="@string/menu_remove_notification"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
 </menu>

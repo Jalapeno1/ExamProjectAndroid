@@ -98,16 +98,19 @@ public class EditNoteActivity extends FragmentActivity {
         });
     }
 
-    public void testAlarm(int day,int month, int year, int hour, int minute){
-        Calendar calendar = Calendar.getInstance();
+    public void testAlarm(int hour, int minute){
+        Calendar c= Calendar.getInstance();
 
-        calendar.set(Calendar.MONTH, month - 1);
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.DAY_OF_MONTH, day);
+//        calendar.set(Calendar.MONTH, month - 1);
+//        calendar.set(Calendar.YEAR, year);
+//        calendar.set(Calendar.DAY_OF_MONTH, day);
+        c.set(Calendar.MONTH, c.get(Calendar.MONTH));
+        c.set(Calendar.YEAR, c.get(Calendar.YEAR));
+        c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH));
 
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
+        c.set(Calendar.HOUR_OF_DAY, hour);
+        c.set(Calendar.MINUTE, minute);
+        c.set(Calendar.SECOND, 0);
 
         Intent myIntent = new Intent(EditNoteActivity.this, NotificationBroadcaster.class);
         myIntent.putExtra("Title", editTextTitle.getText().toString());
@@ -115,7 +118,7 @@ public class EditNoteActivity extends FragmentActivity {
         pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
 
         //AlarmManager.RTC does not wake the device up (RTC_WAKEUP will) and will not be delivered until the device wakes up
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
     }
 
     public void cancelAlarms(){
@@ -207,6 +210,8 @@ public class EditNoteActivity extends FragmentActivity {
             case R.id.action_t2p:
                 textToSpeech();
                 break;
+            case R.id.action_removeNotification:
+                cancelAlarms();
             default:
                 return true;
         }
@@ -239,8 +244,8 @@ public class EditNoteActivity extends FragmentActivity {
         //onTimeSet is called twice for some reason 'callCount' fixes this
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             Log.d(TAG, "HOUR: " + Integer.toString(hourOfDay));
-            if(callCount == 1){
-                ((EditNoteActivity)getActivity()).testAlarm(26,5,2015,hourOfDay,minute);
+            if(callCount == 0){
+                ((EditNoteActivity)getActivity()).testAlarm(hourOfDay,minute);
                 Log.d(TAG, "ADDED " + Integer.toString(callCount));
             } else {
                 Log.d(TAG,"NOT ADDED " + Integer.toString(callCount));
