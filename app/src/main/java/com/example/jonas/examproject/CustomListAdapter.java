@@ -54,15 +54,17 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
             if(note_content != null){
 
                 //only allows a maksimum of 40 characters to avoid a HUGE liste
-                if(no.getContent().length() < 40){
-                    note_content.setText(no.getContent());
+                if(no.getContent().contains("/storage/sdcard/")){
+                    note_content.setText("[Picture Note]");
                 } else {
-                    if(no.getContent().contains("imageDir")){
-                        note_content.setText("[Picture Note]");
+                    if(no.getContent().length() < 40){
+                        note_content.setText(no.getContent());
                     } else {
                         note_content.setText(no.getContent().substring(0,40)+ "...");
                     }
                 }
+
+
             }
         }
         //the view gets returned to the Activity

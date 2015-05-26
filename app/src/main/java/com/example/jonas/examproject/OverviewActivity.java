@@ -75,7 +75,7 @@ public class OverviewActivity extends ListActivity {
                 String SELECTED_CONTENT = objectToEdit.getContent();
 
                 //Checks if note contains path to picture and goes to ViewPictureActivity
-                if(SELECTED_CONTENT.contains("imageDir")){
+                if(SELECTED_CONTENT.contains("/storage/sdcard/")){
                     Intent i = new Intent(getApplicationContext(), ViewPictureActivity.class);
                     i.putExtra("TitleToEdit", SELECTED_TITLE);
                     i.putExtra("ContentToEdit", SELECTED_CONTENT);

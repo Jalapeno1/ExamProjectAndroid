@@ -14,7 +14,7 @@
     <string name="edit_note_delete">Delete</string>
     <string name="edit_note_save">Save</string>
     <string name="edit_text_Title">Title</string>
-    <string name="edit_text_content">Content</string>
+    <string name="edit_text_content">Note</string>
     <string name="main_Title">Title</string>
     <string name="main_Note">Note</string>
     <string name="overview_Label">Notes</string>

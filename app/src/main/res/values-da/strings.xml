@@ -15,8 +15,10 @@
     <string name="main_Note">Note</string>
     <string name="main_Title">Titel</string>
     <string name="overview_Label">Noter</string>
-    <string name="overview_newNote">Ny Note</string>
-    <string name="title_activity_edit_note"></string>
+    <string name="overview_newNote">Tilføj Note</string>
+    <string name="title_activity_edit_note">EditNoteActivity</string>
+    <string name="title_activity_take_picture">TakePictureActivity</string>
+    <string name="title_activity_view_picture">ViewPictureActivity</string>
     <string name="menu_edit">Rediger</string>
     <string name="menu_makeNote">Ny Note</string>
     <string name="menu_takePicture">Tag Billede</string>

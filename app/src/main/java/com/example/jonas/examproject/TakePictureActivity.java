@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -72,18 +73,22 @@ public class TakePictureActivity extends Activity {
 
     public String saveToInternalStorage(String title, Bitmap bitmapImage){
 
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+       // ContextWrapper cw = new ContextWrapper(getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
 
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        // Create imageDir
 
-        File path = new File(directory, "/" + title + ".jpg");
+//        ContextWrapper cw = new ContextWrapper("/sdcard/");
+//        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+//        // Create imageDir
+//
+//        File path = new File(directory, "/" + title + ".jpg");
+        File file = new File(Environment.getExternalStorageDirectory() +
+                File.separator + title + ".jpg");
 
         FileOutputStream fos;
 
         try {
-            fos = new FileOutputStream(path);
+            fos = new FileOutputStream(file);
 
             // Use the compress method on the BitMap object to write image to the OutputStream
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
@@ -92,7 +97,7 @@ public class TakePictureActivity extends Activity {
             e.printStackTrace();
         }
 
-        return directory.getAbsolutePath();
+        return file.getAbsolutePath();//directory.getAbsolutePath();
     }
 
     @Override

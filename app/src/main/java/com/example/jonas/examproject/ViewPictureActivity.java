@@ -54,7 +54,7 @@ public class ViewPictureActivity extends Activity {
         viewTitle.setFocusable(false);
         picDir = i.getStringExtra("ContentToEdit");
 
-        loadImageFromStorage(picDir, picTitle);
+        loadImageFromStorage(picDir);
 
         deletePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,10 +89,10 @@ public class ViewPictureActivity extends Activity {
         });
     }
 
-    public Bitmap loadImageFromStorage(String path, String title)
+    public Bitmap loadImageFromStorage(String path)
     {
         try {
-            file = new File(path, title + ".jpg");
+            file = new File(path);
             b = BitmapFactory.decodeStream(new FileInputStream(file));
             image.setImageBitmap(b);
         }
