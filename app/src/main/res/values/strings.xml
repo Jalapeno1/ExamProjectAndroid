@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project Name</string>
+    <string name="app_name">MyNote</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_overview">Note Overview</string>
@@ -27,7 +27,7 @@
     <string name="view_picture_title">Title</string>
     <string name="toast_noteDeleted">Note deleted…</string>
     <string name="noteCreatedToast">Note created…</string>
-    <string name="title_activity_main">Note Overview</string>
+    <string name="title_activity_main">Create Note</string>
     <string name="menu_add_notification">Add Notification</string>
     <string name="edit_note_delete_title">Delete</string>
     <string name="edit_note_delete_message">Are you sure?</string>

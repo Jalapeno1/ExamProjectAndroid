@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Projekt Navn</string>
+    <string name="app_name">MyNote</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Indstillinger</string>
     <string name="title_activity_overview">Note Oversigt</string>
@@ -27,7 +27,7 @@
     <string name="view_picture_title">Titel</string>
     <string name="toast_noteDeleted">Note Slettet…</string>
     <string name="noteCreatedToast">Note Tilføjet…</string>
-    <string name="title_activity_main">Note Oversigt</string>
+    <string name="title_activity_main">Lav Note</string>
     <string name="menu_add_notification">Tilføj Notifikation</string>
     <string name="edit_note_delete_title">Slet</string>
     <string name="edit_note_delete_message">Er du sikker?</string>
