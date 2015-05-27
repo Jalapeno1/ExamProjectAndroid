@@ -118,6 +118,8 @@ public class EditNoteActivity extends FragmentActivity {
         myIntent.putExtra("Content", editTextContent.getText().toString());
         pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
 
+        
+
         //AlarmManager.RTC does not wake the device up (RTC_WAKEUP will) and will not be delivered until the device wakes up
         alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
     }
