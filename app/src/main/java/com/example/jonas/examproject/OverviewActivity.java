@@ -154,7 +154,7 @@ public class OverviewActivity extends ListActivity {
                 "general-purpose operating systems.");
         b = new NoteObject("Google", "Google is an American multinational technology company specializing " +
                 "in Internet-related services and products. These include online advertising technologies, " +
-                "search, cloud computing, and software.[8] Most of its profits are derived from " +
+                "search, cloud computing, and software. Most of its profits are derived from " +
                 "AdWords,an online advertising service that places advertising near the list of " +
                 "search results.");
         c = new NoteObject("Java (programming language)", "Java is a general-purpose computer programming " +
@@ -178,7 +178,7 @@ public class OverviewActivity extends ListActivity {
                 "suite, and Internet Explorer web browser. Its flagship hardware products are the " +
                 "Xbox game consoles and the Microsoft Surface tablet lineup. It is the world's " +
                 "largest software maker measured by revenues. It is also one of the world's most " +
-                "valuable companies.[6]");
+                "valuable companies.");
         e = new NoteObject("Internet Explorer", "Internet Explorer is one of the most widely used web " +
                 "browsers, attaining a peak of about 95% usage share during 2002 and 2003. Its " +
                 "usage share has since declined with the launch of Firefox (2004) and Google Chrome " +
