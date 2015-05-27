@@ -23,6 +23,8 @@ public class AlarmService extends Service {
     @Override
     public void onStart(Intent intent, int startId)
     {
+        //Could use NotifictionCompat.Builder to construct notification (it's newer)
+
         super.onStart(intent, startId);
 
         String title = intent.getStringExtra("Title");
@@ -38,7 +40,9 @@ public class AlarmService extends Service {
 
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity( this.getApplicationContext(),0, intent1,PendingIntent.FLAG_UPDATE_CURRENT);
         notification.flags |= Notification.FLAG_AUTO_CANCEL;
-        notification.setLatestEventInfo(this.getApplicationContext(), "NOTIFICATION", title, pendingNotificationIntent);
+        notification.setLatestEventInfo(this.getApplicationContext(), title, content, pendingNotificationIntent);
+        notification.defaults |= Notification.DEFAULT_VIBRATE;
+        notification.defaults |= Notification.DEFAULT_SOUND;
 
         mManager.notify(0, notification);
     }
