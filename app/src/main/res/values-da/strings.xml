@@ -35,5 +35,6 @@
     <string name="edit_note_delete_toast_message">Note slettet…</string>
     <string name="edit_note_delete_negative">Nej</string>
     <string name="menu_remove_notification">Fjern Notifikation</string>
+    <string name="see_location">Se Lokation</string>
 
 </resources>

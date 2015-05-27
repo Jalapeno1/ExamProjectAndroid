@@ -1,11 +1,8 @@
 package com.example.jonas.examproject;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,8 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 
@@ -60,7 +55,7 @@ public class TakePictureActivity extends Activity {
                 NoteObject no = new NoteObject(picTitle, savePath);
                 dbHandler.addNote(no);
 
-                Toast.makeText(getApplicationContext(), "Picture note created...",
+                Toast.makeText(getApplicationContext(), getString(R.string.picture_note_created),
                         Toast.LENGTH_LONG).show();
 
                 Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
@@ -118,7 +113,7 @@ public class TakePictureActivity extends Activity {
 
             }
             else if (resultCode == RESULT_CANCELED) {
-                Toast.makeText(this, "Picture was not taken", Toast.LENGTH_SHORT);
+                Toast.makeText(this, getString(R.string.picture_not_taken), Toast.LENGTH_SHORT);
             }
         }
     }

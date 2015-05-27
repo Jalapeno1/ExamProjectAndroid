@@ -35,4 +35,7 @@
     <string name="edit_note_delete_toast_message">Note deleted…</string>
     <string name="edit_note_delete_negative">No</string>
     <string name="menu_remove_notification">Remove Notification</string>
+    <string name="see_location">See Location</string>
+    <string name="picture_note_created">Picture note created...</string>
+    <string name="picture_not_taken">Picture was not taken</string>
 </resources>

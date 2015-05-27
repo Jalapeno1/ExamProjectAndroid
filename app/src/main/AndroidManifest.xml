@@ -31,6 +31,10 @@
             android:name=".ViewPictureActivity"
             android:label="@string/title_activity_view_picture" >
         </activity>
+        <activity
+            android:name=".Maps"
+            android:label="Maps" >
+        </activity>
 
         <receiver android:name=".NotificationBroadcaster"/>
 

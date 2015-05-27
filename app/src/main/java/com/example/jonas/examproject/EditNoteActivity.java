@@ -2,15 +2,14 @@ package com.example.jonas.examproject;
 
 import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.text.format.DateFormat;
@@ -19,7 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -38,6 +36,8 @@ public class EditNoteActivity extends FragmentActivity {
     private static int noteID;
 
     private String oldtitle;
+    private String oldcontent;
+    private String cordinates;
     private TextToSpeech tts;
 
     private PendingIntent pendingIntent;
@@ -68,6 +68,7 @@ public class EditNoteActivity extends FragmentActivity {
         editTextContent.setText(i.getStringExtra("ContentToEdit"));
 
         oldtitle = i.getStringExtra("TitleToEdit");
+        oldcontent = i.getStringExtra("ContentToEdit");
 
         //lock functionality -> change when 'edit' clicked
         editTextTitle.setFocusable(false);
@@ -180,6 +181,24 @@ public class EditNoteActivity extends FragmentActivity {
         DialogFragment newFragment = new TimeAndDatePickerFragment();
         newFragment.show(fm, "datePickerHOLO");
     }
+    public void seeLocation() {
+        if(oldcontent != null){
+            if(oldcontent.contains("No location found")){
+                Log.d("DEBUG", "Works");
+                Toast.makeText(getApplicationContext(), "Could not find any location",
+                        Toast.LENGTH_LONG).show();
+            }
+            else{
+                cordinates = oldcontent.substring(oldcontent.length() - 19);
+                Toast.makeText(getApplicationContext(), cordinates,
+                        Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), Maps.class);
+                i.putExtra("cordinates",oldcontent);
+                startActivity(i);
+            }
+
+        }
+    }
 
 
     @Override
@@ -212,6 +231,9 @@ public class EditNoteActivity extends FragmentActivity {
                 break;
             case R.id.action_removeNotification:
                 cancelAlarms();
+                break;
+            case R.id.action_seeLocation:
+                seeLocation();
             default:
                 return true;
         }
