@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class CustomListAdapter extends ArrayAdapter<NoteObject> {
 
     private ArrayList<NoteObject> objects;
+    public String[] parts;
 
     //overrides Constructor to contain ArrayList<NoteObjects> (to show in ListView)
     public CustomListAdapter(Context context, int textViewResourceId, ArrayList<NoteObject> items){
@@ -45,26 +46,22 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
             //it contains a TextView for a title and content
             TextView note_title = (TextView) v.findViewById(R.id.noteTitle);
             TextView note_content = (TextView) v.findViewById(R.id.noteContent);
-
             //checks if the components are null. If they are not, add values
             if(note_title != null){
                 note_title.setText(no.getTitle());
             }
 
             if(note_content != null){
-
                 //only allows a maksimum of 40 characters to avoid a HUGE liste
                 if(no.getContent().contains("/storage/")){
                     note_content.setText("[Picture Note]");
-                } else {
+                }else {
                     if(no.getContent().length() < 40){
                         note_content.setText(no.getContent());
                     } else {
                         note_content.setText(no.getContent().substring(0,40)+ "...");
                     }
                 }
-
-
             }
         }
         //the view gets returned to the Activity

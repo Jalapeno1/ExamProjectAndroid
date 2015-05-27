@@ -189,14 +189,15 @@ public class EditNoteActivity extends FragmentActivity {
                         Toast.LENGTH_LONG).show();
             }
             else{
-                cordinates = oldcontent.substring(oldcontent.length() - 19);
-                Toast.makeText(getApplicationContext(), cordinates,
-                        Toast.LENGTH_LONG).show();
+                String[] parts;
+                if (oldcontent.contains("Cordinates: ")) {
+                    parts = oldcontent.split("Cordinates: ");
+                    cordinates = parts[1];
+                }
                 Intent i = new Intent(getApplicationContext(), Maps.class);
                 i.putExtra("cordinates",oldcontent);
                 startActivity(i);
             }
-
         }
     }
 
