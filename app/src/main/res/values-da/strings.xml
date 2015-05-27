@@ -36,5 +36,8 @@
     <string name="edit_note_delete_negative">Nej</string>
     <string name="menu_remove_notification">Fjern Notifikation</string>
     <string name="see_location">Se Lokation</string>
+    <string name="picture_not_taken">Billede blev ikke taget</string>
+    <string name="picture_note_created">Billede note oprettet</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

@@ -182,7 +182,7 @@ public class EditNoteActivity extends FragmentActivity {
         newFragment.show(fm, "datePickerHOLO");
     }
     public void seeLocation() {
-        if(oldcontent != null){
+/*        if(oldcontent != null){
             if(oldcontent.contains("No location found")){
                 Log.d("DEBUG", "Works");
                 Toast.makeText(getApplicationContext(), "Could not find any location",
@@ -198,7 +198,21 @@ public class EditNoteActivity extends FragmentActivity {
                 i.putExtra("cordinates",oldcontent);
                 startActivity(i);
             }
+        }*/
+
+/*        String[] parts;
+        if (oldcontent.contains("Cordinates: ")) {
+            parts = oldcontent.split("Cordinates: ");
+            cordinates = parts[1];
         }
+        Intent i = new Intent(getApplicationContext(), Maps.class);
+        i.putExtra("cordinates",oldcontent);
+        startActivity(i);*/
+
+        Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+        //i.putExtra("cordinates",oldcontent);
+        startActivity(i);
+
     }
 
 

@@ -8,8 +8,6 @@ import android.util.Log;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 
 public class Maps extends FragmentActivity
@@ -46,8 +44,8 @@ public class Maps extends FragmentActivity
             lat = Integer.parseInt(parts[0]);
             lng = Integer.parseInt(parts[1]);
         }
-        map.addMarker(new MarkerOptions()
+/*        map.addMarker(new MarkerOptions()
                 .position(new LatLng(lat, lng))
-                .title("Marker"));
+                .title("Marker"));*/
     }
 }

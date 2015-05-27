@@ -38,4 +38,5 @@
     <string name="see_location">See Location</string>
     <string name="picture_note_created">Picture note created...</string>
     <string name="picture_not_taken">Picture was not taken</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
