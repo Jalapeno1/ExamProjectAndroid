@@ -12,6 +12,8 @@ import android.os.IBinder;
  */
 public class AlarmService extends Service {
 
+    //used to run background functionality
+
     private NotificationManager mManager;
 
     @Override
@@ -23,7 +25,7 @@ public class AlarmService extends Service {
     @Override
     public void onStart(Intent intent, int startId)
     {
-        //Could use NotifictionCompat.Builder to construct notification (it's newer)
+        //Could use NotificationCompat.Builder to construct notification (it's newer)
 
         super.onStart(intent, startId);
 

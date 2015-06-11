@@ -10,6 +10,8 @@ import android.util.Log;
  */
 public class NotificationBroadcaster extends BroadcastReceiver {
 
+    //used to register system/app events
+
     private String TAG = "NotificationBroadcaster";
 
     @Override

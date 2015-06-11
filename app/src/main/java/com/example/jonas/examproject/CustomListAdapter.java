@@ -25,6 +25,8 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
     //getView defines how the ListView will look
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        //position of the dataset, convertView: individual view within listview, parent: the listview
+
 
         //creates a local variable of the view
         View v = convertView;
