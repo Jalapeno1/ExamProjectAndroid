@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class CustomListAdapter extends ArrayAdapter<NoteObject> {
 
     private ArrayList<NoteObject> objects;
-    public String[] parts;
 
     //overrides Constructor to contain ArrayList<NoteObjects> (to show in ListView)
     public CustomListAdapter(Context context, int textViewResourceId, ArrayList<NoteObject> items){

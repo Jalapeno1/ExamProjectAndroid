@@ -84,7 +84,7 @@ public class MainActivity extends Activity implements
     public void newNote (View view) {
         //Writes to DB
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString() + " - Cordinates: " + cordinates );
+        NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString()); //+ " - Cordinates: " + cordinates
         dbHandler.addNote(noteObject);
 
         Toast.makeText(getApplicationContext(), getString(R.string.noteCreatedToast),

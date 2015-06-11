@@ -115,29 +115,29 @@ public class OverviewActivity extends ListActivity {
         setListAdapter(adapter);
 
         //start thread for list creating
-        viewNotes = new Runnable() {
-            @Override
-            public void run() {
-                handler.sendEmptyMessage(0);
-            }
-        };
+//        viewNotes = new Runnable() {
+//            @Override
+//            public void run() {
+//                handler.sendEmptyMessage(0);
+//            }
+//        };
 
         Thread thread = new Thread(null, viewNotes, "newThread");
         thread.start();
         Log.d(TAG, "initiated Adapter");
     }
 
-    //handles the data used for the listView
-    private Handler handler = new Handler()
-    {
-        public void handleMessage(Message msg)
-        {
-            //NOTE: hvis der skal hentes data fra DB/server, saa goeres det her.
-            adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
-            setListAdapter(adapter);
-            Log.d(TAG, "HandlerSet");
-        }
-    };
+//    //handles the data used for the listView
+//    private Handler handler = new Handler()
+//    {
+//        public void handleMessage(Message msg)
+//        {
+//            //NOTE: hvis der skal hentes data fra DB/server, saa goeres det her.
+//            adapter = new CustomListAdapter(OverviewActivity.this, R.layout.list_notes, allNotes);
+//            setListAdapter(adapter);
+//            Log.d(TAG, "HandlerSet");
+//        }
+//    };
 
     public void addTestData(MyDBHandler dbHandler){
         NoteObject a,b,c,d,e,f,g,h,i,j;

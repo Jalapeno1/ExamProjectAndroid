@@ -42,7 +42,7 @@ public class AlarmService extends Service {
         // activities on top of it will be closed and this Intent will be delivered to
         // the (now on top) old activity as a new Intent.
         //If set FLAG_ACTIVITY_SINGLE_TOP, the activity will not be launched if it is already running at the top of the history stack.
-        intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent1.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         //creates pending intent and updates current pending intent (if there is one)
         PendingIntent pendingNotificationIntent = PendingIntent.getActivity( this.getApplicationContext(),0, intent1,PendingIntent.FLAG_UPDATE_CURRENT);
