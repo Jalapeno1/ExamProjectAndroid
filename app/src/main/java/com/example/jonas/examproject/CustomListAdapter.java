@@ -57,10 +57,13 @@ public class CustomListAdapter extends ArrayAdapter<NoteObject> {
                 if(no.getContent().contains("/storage/")){
                     note_content.setText("[Picture Note]");
                 }else {
+
+                    String[] splitted = no.getContent().split(" - Cordinates:");
+
                     if(no.getContent().length() < 40){
-                        note_content.setText(no.getContent());
+                        note_content.setText(splitted[0]);
                     } else {
-                        note_content.setText(no.getContent().substring(0,40)+ "...");
+                        note_content.setText(splitted[0].substring(0,40)+ "...");
                     }
                 }
             }
