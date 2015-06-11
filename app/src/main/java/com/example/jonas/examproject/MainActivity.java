@@ -1,15 +1,9 @@
 package com.example.jonas.examproject;
 
 import android.app.Activity;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +14,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 import com.google.android.gms.location.LocationServices;
 
 
@@ -84,7 +76,7 @@ public class MainActivity extends Activity implements
     public void newNote (View view) {
         //Writes to DB
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
-        NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString()); //+ " - Cordinates: " + cordinates
+        NoteObject noteObject = new NoteObject(title.getText().toString(), content.getText().toString() + " - Cordinates: " + cordinates); //+ " - Cordinates: " + cordinates
         dbHandler.addNote(noteObject);
 
         Toast.makeText(getApplicationContext(), getString(R.string.noteCreatedToast),
@@ -148,7 +140,7 @@ public class MainActivity extends Activity implements
         mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         Log.d("DEBUG", "data: " + LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient));
         if (mLastLocation != null) {
-            cordinates = String.valueOf(mLastLocation.getLatitude() + " - " + String.valueOf(mLastLocation.getLongitude()));
+            cordinates = String.valueOf(mLastLocation.getLatitude() + " @ " + String.valueOf(mLastLocation.getLongitude()));
             Log.d("Cordinates",String.valueOf(mLastLocation.getLatitude()) + " : " + String.valueOf(mLastLocation.getLongitude()));
         } else {
             cordinates = "No location found";

@@ -1,8 +1,11 @@
 package com.example.jonas.examproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -11,7 +14,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    public String cordinates;
+    public double latitude;
+    public double longitude;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,9 +24,13 @@ public class MapsActivity extends FragmentActivity {
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
 
-/*        Intent i = getIntent();
-        cordinates = i.getStringExtra("cordinates");
-        Log.d("Cordinates in maps:", cordinates);*/
+        Intent i = getIntent();
+        latitude = i.getDoubleExtra("latitude", 0);
+        longitude = i.getDoubleExtra("longitude", 0);
+
+        Log.d("Cordinates in maps:", latitude + " " + longitude);
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 10f));
     }
 
     @Override
@@ -65,14 +74,6 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-/*        String parts[];
-        int lat = 0;
-        int lng = 0;
-        if (cordinates.contains(" - ")) {
-            parts = cordinates.split(" - ");
-            lat = Integer.parseInt(parts[0]);
-            lng = Integer.parseInt(parts[1]);
-        }*/
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+
     }
 }

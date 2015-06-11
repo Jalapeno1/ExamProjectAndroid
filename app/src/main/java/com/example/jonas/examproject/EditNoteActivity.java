@@ -37,7 +37,6 @@ public class EditNoteActivity extends FragmentActivity {
 
     private String oldtitle;
     private String oldcontent;
-    private String cordinates;
     private TextToSpeech tts;
 
     private PendingIntent pendingIntent;
@@ -118,8 +117,6 @@ public class EditNoteActivity extends FragmentActivity {
         myIntent.putExtra("Content", editTextContent.getText().toString());
         pendingIntent = PendingIntent.getBroadcast(EditNoteActivity.this, 0, myIntent,0);
 
-        
-
         //AlarmManager.RTC does not wake the device up (RTC_WAKEUP will) and will not be delivered until the device wakes up
         alarmManager.set(AlarmManager.RTC, c.getTimeInMillis(), pendingIntent);
     }
@@ -134,7 +131,7 @@ public class EditNoteActivity extends FragmentActivity {
     }
 
     public void textToSpeech(){
-            tts = new TextToSpeech(EditNoteActivity.this, new TextToSpeech.OnInitListener() {
+        tts = new TextToSpeech(EditNoteActivity.this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
                 tts.setLanguage(Locale.US);
@@ -150,7 +147,6 @@ public class EditNoteActivity extends FragmentActivity {
         String title = editTextTitle.getText().toString();
         String content = editTextContent.getText().toString();
 
-
         //Calls DBHandler with the new object
         MyDBHandler dbHandler = new MyDBHandler(this, null, null, 1);
         NoteObject noteObject = new NoteObject(title, content);
@@ -159,8 +155,6 @@ public class EditNoteActivity extends FragmentActivity {
         //Changes view
         Intent i = new Intent(getApplicationContext(), OverviewActivity.class);
         startActivity(i);
-        //dbHandler.deleteNote(noteObject.getTitle().toString
-        // ());
     }
     public void deleteNote (View view){
 
@@ -184,37 +178,30 @@ public class EditNoteActivity extends FragmentActivity {
         newFragment.show(fm, "datePickerHOLO");
     }
     public void seeLocation() {
-/*        if(oldcontent != null){
-            if(oldcontent.contains("No location found")){
-                Log.d("DEBUG", "Works");
-                Toast.makeText(getApplicationContext(), "Could not find any location",
-                        Toast.LENGTH_LONG).show();
-            }
-            else{
-                String[] parts;
-                if (oldcontent.contains("Cordinates: ")) {
-                    parts = oldcontent.split("Cordinates: ");
-                    cordinates = parts[1];
-                }
-                Intent i = new Intent(getApplicationContext(), Maps.class);
-                i.putExtra("cordinates",oldcontent);
-                startActivity(i);
-            }
-        }*/
-
-/*        String[] parts;
-        if (oldcontent.contains("Cordinates: ")) {
-            parts = oldcontent.split("Cordinates: ");
-            cordinates = parts[1];
+        String part2 = "";
+        double latitude = 0;
+        double longitude = 0;
+        String nospace = oldcontent.replaceAll("\\s","");
+        if (nospace.contains(":")) {
+            String[] parts = nospace.split("Cordinates:");
+            String part1 = parts[0]; //part1 not in use
+            part2 = parts[1]; // Holds the cordinates
         }
-        Intent i = new Intent(getApplicationContext(), Maps.class);
-        i.putExtra("cordinates",oldcontent);
-        startActivity(i);*/
-
+        if (part2.contains("@")) {
+            Log.d("DEBUGG part2", part2);
+            String[] parts = part2.split("@");
+            String lat = parts[0];
+            String lon = parts[1];
+            Log.d("DEBUGG lat and lon", lat + " " + lon);
+            latitude = Double.parseDouble(lat);
+            longitude = Double.parseDouble(lon);
+        }
+        Log.d("latitude", "" +latitude);
+        Log.d("longitude", "" +longitude);
         Intent i = new Intent(getApplicationContext(), MapsActivity.class);
-        //i.putExtra("cordinates",oldcontent);
+        i.putExtra("latitude",latitude);
+        i.putExtra("longitude",longitude);
         startActivity(i);
-
     }
 
 
