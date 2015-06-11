@@ -122,7 +122,7 @@ public class OverviewActivity extends ListActivity {
             }
         };
 
-        Thread thread = new Thread(null, viewNotes, "MagentoBackground");
+        Thread thread = new Thread(null, viewNotes, "newThread");
         thread.start();
         Log.d(TAG, "initiated Adapter");
     }
